@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.bahar.mystory",
+    "sha256_cert_fingerprints": [
+      "ED:96:C2:4F:84:A5:A0:4D:A6:4E:0C:AC:97:18:D7:8E:C0:94:AE:7D:A0:94:E9:A8:1E:D6:45:22:8A:B6:EC:E6"
+    ]
+  }
+}]
