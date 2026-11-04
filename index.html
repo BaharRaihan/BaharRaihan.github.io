@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Story</title>
+<meta name="description" content="The story, education, work and journey of Bahar Uddin Rayhan.">
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="home">
+<header class="nav">
+  <a class="brand" href="#top" id="brandName"></a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#journey">Journey</a>
+    <a href="#work">Work</a>
+    <a href="#updates">Updates</a>
+    <a href="cv.html">CV</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="avatar" id="avatar"></div>
+    <h1 id="heroName"></h1>
+    <p class="tagline" id="heroTagline"></p>
+    <p class="loc" id="heroLoc"></p>
+    <div class="actions">
+      <a class="btn" href="#about">Read my story</a>
+      <a class="btn ghost" href="cv.html">View CV</a>
+    </div>
+  </section>
+
+  <section id="videoSec" class="wrap" hidden>
+    <h2>My Video</h2>
+    <div class="video"><iframe id="video" title="Video" loading="lazy" allowfullscreen></iframe></div>
+  </section>
+
+  <section id="about" class="wrap"><h2>Who I Am</h2><div id="aboutBody"></div><div id="skills" class="chips"></div></section>
+
+  <section id="journey" class="wrap"><h2>Education and Life Struggle</h2>
+    <h3>Education</h3><div id="edu" class="cards"></div>
+    <h3>My Journey</h3><ol id="timeline" class="timeline"></ol>
+  </section>
+
+  <section id="work" class="wrap"><h2>Current Work and Livelihood</h2><div id="workBody" class="card"></div></section>
+
+  <section id="exp" class="wrap"><h2>Experience</h2><div id="expBody" class="cards"></div></section>
+
+  <section id="impact" class="wrap"><h2>Advocacy, Awards and Training</h2>
+    <h3>Advocacy and community work</h3><div id="advBody" class="cards"></div>
+    <h3>Awards</h3><ul id="awardsBody" class="plain"></ul>
+    <h3>Training</h3><ul id="trainBody" class="plain"></ul>
+  </section>
+
+  <section id="pressSec" class="wrap" hidden><h2>In the News</h2><div id="press" class="cards"></div></section>
+
+  <section id="updates" class="wrap"><h2>My Work and Travels</h2><div id="feed" class="cards"></div></section>
+
+  <section id="contact" class="wrap"><h2>Contact</h2><div id="contactBody" class="card"></div></section>
+</main>
+
+<footer>
+  <span><span id="copy"></span> · <a href="privacy.html" style="color:inherit">Privacy</a></span>
+  <button id="supportLink" class="quiet" hidden>♡ Support</button>
+</footer>
+
+<dialog id="supportDlg">
+  <form method="dialog"><button class="x" aria-label="Close">✕</button></form>
+  <h3>♡ Support</h3>
+  <p id="supportMsg"></p>
+  <ul id="supportList"></ul>
+</dialog>
+
+<script src="content.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
