@@ -3,73 +3,83 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My Story</title>
-<meta name="description" content="The story, education, work and journey of Bahar Uddin Rayhan.">
+<title>Bahar Uddin Raihan | My Story</title>
+<meta name="description" content="The story, strength and journey of Bahar Uddin Raihan: words of courage, achievements, work, photos and videos.">
 <meta name="theme-color" content="#0f766e">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body data-page="home">
+<div id="demoBar" class="demobar" hidden>Demo mode: sample items are shown. They never appear on the live site.</div>
+
 <header class="nav">
   <a class="brand" href="#top" id="brandName"></a>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#journey">Journey</a>
-    <a href="#work">Work</a>
-    <a href="#updates">Updates</a>
-    <a href="cv.html">CV</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <nav id="navLinks"></nav>
 </header>
 
 <main id="top">
   <section class="hero">
     <div class="avatar" id="avatar"></div>
+    <p class="eyebrow" id="heroEyebrow"></p>
     <h1 id="heroName"></h1>
-    <p class="tagline" id="heroTagline"></p>
-    <p class="loc" id="heroLoc"></p>
+    <p class="roles" id="heroRoles"></p>
+    <p class="headline" id="heroHeadline"></p>
+    <p class="intro" id="heroIntro"></p>
     <div class="actions">
-      <a class="btn" href="#about">Read my story</a>
-      <a class="btn ghost" href="cv.html">View CV</a>
+      <a class="btn" href="#story">Read my story</a>
+      <a class="btn ghost" id="heroSecond" href="cv.html">View CV</a>
     </div>
   </section>
 
-  <section id="videoSec" class="wrap" hidden>
-    <h2>My Video</h2>
-    <div class="video"><iframe id="video" title="Video" loading="lazy" allowfullscreen></iframe></div>
+  <section id="qotd" class="wrap" hidden>
+    <figure class="qotd"><figcaption>Today's words of strength</figcaption><blockquote id="qotdText"></blockquote><cite id="qotdSrc"></cite></figure>
   </section>
 
-  <section id="about" class="wrap"><h2>Who I Am</h2><div id="aboutBody"></div><div id="skills" class="chips"></div></section>
-
-  <section id="journey" class="wrap"><h2>Education and Life Struggle</h2>
-    <h3>Education</h3><div id="edu" class="cards"></div>
-    <h3>My Journey</h3><ol id="timeline" class="timeline"></ol>
+  <section id="story" class="wrap">
+    <h2>My Story</h2>
+    <div id="aboutBody"></div>
+    <h3>The road so far</h3><ol id="timeline" class="timeline"></ol>
   </section>
 
-  <section id="work" class="wrap"><h2>Current Work and Livelihood</h2><div id="workBody" class="card"></div></section>
+  <section id="achSec" class="wrap" hidden><h2>Achievements</h2><div id="achBody" class="grid"></div></section>
 
-  <section id="exp" class="wrap"><h2>Experience</h2><div id="expBody" class="cards"></div></section>
+  <section id="quotesSec" class="wrap" hidden><h2>Words of Strength</h2><div id="quotesBody" class="quotes"></div></section>
 
-  <section id="impact" class="wrap"><h2>Advocacy, Awards and Training</h2>
-    <h3>Advocacy and community work</h3><div id="advBody" class="cards"></div>
-    <h3>Awards</h3><ul id="awardsBody" class="plain"></ul>
-    <h3>Training</h3><ul id="trainBody" class="plain"></ul>
+  <section id="videosSec" class="wrap" hidden><h2>Videos</h2><div id="videosBody" class="videos"></div></section>
+
+  <section id="gallerySec" class="wrap" hidden><h2>Moments</h2><div id="galleryBody" class="gallery"></div></section>
+
+  <section id="work" class="wrap">
+    <h2>Work and Service</h2>
+    <div id="workBody" class="card"></div>
+    <div id="worksBody" class="cards"></div>
+    <h3>Experience</h3><div id="expBody" class="cards"></div>
+  </section>
+
+  <section id="learn" class="wrap">
+    <h2>Education and Training</h2>
+    <div id="edu" class="cards"></div>
+    <ul id="trainBody" class="plain"></ul>
+    <div id="skills" class="chips"></div>
   </section>
 
   <section id="pressSec" class="wrap" hidden><h2>In the News</h2><div id="press" class="cards"></div></section>
 
-  <section id="updates" class="wrap"><h2>My Work and Travels</h2><div id="feed" class="cards"></div></section>
+  <section id="updatesSec" class="wrap" hidden><h2>Latest</h2><div id="feed" class="cards"></div></section>
 
-  <section id="contact" class="wrap"><h2>Contact</h2><div id="contactBody" class="card"></div></section>
+  <section id="contact" class="wrap"><h2>Connect</h2><div id="contactBody" class="card"></div></section>
 </main>
 
 <footer>
-  <span><span id="copy"></span> · <a href="privacy.html" style="color:inherit">Privacy</a></span>
-  <button id="supportLink" class="quiet" hidden>♡ Support</button>
+  <p id="disclaimer" class="disclaimer"></p>
+  <div class="foot">
+    <span><span id="copy"></span> · <a href="privacy.html" style="color:inherit">Privacy</a></span>
+    <button id="supportLink" class="quiet" hidden>♡ Support</button>
+  </div>
 </footer>
 
 <dialog id="supportDlg">
@@ -77,6 +87,12 @@
   <h3>♡ Support</h3>
   <p id="supportMsg"></p>
   <ul id="supportList"></ul>
+</dialog>
+
+<dialog id="photoDlg" class="photodlg">
+  <form method="dialog"><button class="x" aria-label="Close">✕</button></form>
+  <img id="photoImg" alt="">
+  <p id="photoCap"></p>
 </dialog>
 
 <script src="content.js"></script>

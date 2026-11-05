@@ -1,4 +1,4 @@
-const CACHE = "mystory-v2";
+const CACHE = "mystory-v3";
 const FILES = ["index.html", "cv.html", "style.css", "app.js", "content.js", "icon.svg", "icon-192.png", "icon-512.png", "privacy.html", "photo.jpg", "manifest.webmanifest"];
 
 self.addEventListener("install", (e) => e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting())));
