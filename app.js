@@ -45,7 +45,8 @@
   const av = $("avatar");
   if (S.photo) av.style.backgroundImage = `url("${S.photo}")`; else av.textContent = [...S.name][0] || "?";
   const socials = (S.social || []).filter((s) => s.url);
-  $("heroSocial").innerHTML = socials.map((s) => `<a href="${esc(link(s.url))}" target="_blank" rel="noopener" aria-label="${esc(s.label)}" title="${esc(s.label)}">${esc(s.icon || s.label[0])}</a>`).join("");
+  $("heroSocial").innerHTML = socials.map((s) => `<a class="${ICON.kind(s.label)}" href="${esc(link(s.url))}" target="_blank" rel="noopener" aria-label="${esc(s.label)}" title="${esc(s.label)}">${ICON.glyph(ICON.kind(s.label))}</a>`).join("");
+  $("cvIco").innerHTML = ICON.glyph("download");
 
   // ---- media wall
   const media = real(S.media);
@@ -150,11 +151,13 @@
   const ups = real(S.updates);
   if (ups.length) {
     $("updatesSec").hidden = false;
-    $("feed").innerHTML = ups.map((u) => `<article class="card"><small>${esc(u.date)} · 📍 ${esc(u.place)}</small><p style="margin:4px 0 0">${esc(u.text)}</p>${u.image ? `<img src="${esc(u.image)}" alt="" loading="lazy">` : ""}</article>`).join("");
+    $("feed").innerHTML = ups.map((u) => `<article class="card"><small class="when">${esc(u.date)} <span class="pinico">${ICON.glyph("pin")}</span>${esc(u.place)}</small><p style="margin:4px 0 0">${esc(u.text)}</p>${u.image ? `<img src="${esc(u.image)}" alt="" loading="lazy">` : ""}</article>`).join("");
   }
+  const arrow = `<i class="go">${ICON.glyph("arrow")}</i>`;
   $("contactBody").innerHTML =
-    `<p>📧 <a href="mailto:${esc(S.email)}">${esc(S.email)}</a></p>${S.phone ? `<p>📞 ${esc(S.phone)}</p>` : ""}` +
-    (socials.length ? `<p>${socials.map((s) => `<a href="${esc(link(s.url))}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join(" · ")}</p>` : "");
+    `<a class="clink big mail" href="mailto:${esc(S.email)}">${ICON.tile("mail")}<span class="ct"><b>Send me an email</b><small>${esc(S.email)}</small></span>${arrow}</a>` +
+    (S.phone ? `<a class="clink big phone" href="tel:${esc(S.phone)}">${ICON.tile("phone")}<span class="ct"><b>Call me</b><small>${esc(S.phone)}</small></span>${arrow}</a>` : "") +
+    (socials.length ? `<div class="cgrid">${socials.map((s) => { const k = ICON.kind(s.label); return `<a class="clink ${k}" href="${esc(link(s.url))}" target="_blank" rel="noopener">${ICON.tile(k)}<span class="ct"><b>${esc(s.label.replace(/\s*\(.*\)/, ""))}</b><small>${esc(ICON.hint[k] || "Open")}</small></span></a>`; }).join("")}</div>` : "");
 
   // ---- nav shows only sections that are visible
   const nav = [["media", "In the news"], ["story", "Story"], ["achSec", "Achievements"], ["videosSec", "Videos"], ["gallerySec", "Moments"], ["work", "Work"], ["contact", "Connect"]];
@@ -202,7 +205,7 @@
     $("cv").innerHTML = `
       <h1>${esc(S.name)}</h1>
       <p class="sub">${esc(S.tagline)}</p>
-      <p class="sub">📍 ${esc(S.location)} · 📧 ${esc(S.email)}${S.phone ? " · 📞 " + esc(S.phone) : ""}</p>
+      <p class="sub">${esc(S.location)} · ${esc(S.email)}${S.phone ? " · " + esc(S.phone) : ""}</p>
       ${soc ? `<p class="sub small">${soc}</p>` : ""}
       <h2>Profile</h2>${S.about.map((p) => `<p>${esc(p)}</p>`).join("")}
       <h2>Current Work</h2><div class="row"><b>${esc(w.title)}, ${esc(w.org)}</b><span>${esc(w.since)}</span></div><p>${esc(w.description)}</p>

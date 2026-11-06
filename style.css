@@ -24,7 +24,7 @@ h1{font-size:clamp(34px,8vw,56px);margin:.1em auto;line-height:1.08;font-weight:
 .btn{display:inline-block;padding:12px 24px;border-radius:999px;background:var(--yellow);color:var(--ink);text-decoration:none;border:2px solid var(--yellow);font:inherit;font-weight:800;cursor:pointer}
 .btn.ghost{background:transparent;color:#fff;border-color:#fff}
 .social{display:flex;gap:10px;justify-content:center;margin-top:18px}
-.social a{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--green);text-decoration:none;font-weight:800}
+.social a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--green);text-decoration:none;transition:transform .15s}.social a:hover{transform:translateY(-3px)}.social a.facebook{color:#1877f2}.social a.youtube{color:#ff0000}.social a.tiktok{color:#111}.social a.linkedin{color:#0a66c2}.social a.instagram{color:#d62976}.social svg{width:22px;height:22px}
 /* ticker */
 .ticker{background:var(--ink);color:#fff;overflow:hidden;white-space:nowrap;font-weight:700;font-size:14px;letter-spacing:.04em}
 .track{display:inline-block;animation:slide 40s linear infinite;padding:9px 0}
@@ -126,3 +126,22 @@ body[data-page=cv] .btn,body[data-page=privacy] .btn{background:var(--yellow)}
 .cfig.ph{border:3px dashed rgba(255,255,255,.7);border-radius:12px;padding:26px 14px;text-align:center;font-weight:700;font-size:14px}
 .c4 .cfig.ph{border-color:var(--ink)}
 .slot{display:inline-block;vertical-align:middle;margin-left:10px;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:none;color:#fff;background:#7c3aed;border-radius:6px;padding:1px 8px}
+/* icon tiles and contact cards */
+.btnico{display:inline-block;vertical-align:-5px;margin-right:6px}.btnico svg{width:20px;height:20px}
+.ico{flex:none;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--green);color:#fff}
+.ico svg{width:26px;height:26px}
+.ico.mail{background:var(--green)}.ico.phone{background:var(--blue)}
+.ico.facebook{background:#1877f2}.ico.youtube{background:#ff0000}.ico.tiktok{background:#111}.ico.linkedin{background:#0a66c2}
+.ico.instagram{background:linear-gradient(135deg,#feda75,#d62976 55%,#4f5bd5)}
+.clink{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--card);border:2px solid var(--ink);border-radius:16px;text-decoration:none;color:var(--fg);box-shadow:4px 4px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.clink:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.clink .ct{display:flex;flex-direction:column;min-width:0;line-height:1.3}
+.clink .ct b{font-size:17px}
+.clink .ct small{color:var(--mut);font-size:14px;overflow:hidden;text-overflow:ellipsis}
+.clink.big{margin-bottom:14px;background:var(--yellow)}
+.clink.big .ct b{font-size:19px}.clink.big .ct small{color:var(--ink);font-size:15px;word-break:break-all}
+.clink .go{margin-left:auto;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;font-style:normal;flex:none}
+.clink .go svg{width:18px;height:18px}
+.cgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.when{display:flex;align-items:center;gap:4px;flex-wrap:wrap}.pinico{display:inline-grid;vertical-align:middle;margin-left:6px;color:var(--red)}.pinico svg{width:15px;height:15px}
+.cvcard{background:var(--green);color:#fff}.cvcard span{color:#e0f1e8}

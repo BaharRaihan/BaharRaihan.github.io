@@ -157,9 +157,9 @@ window.SITE = {
   social: [
     { label: "Facebook", icon: "f", url: "https://www.facebook.com/Our.Raihan" },
     { label: "YouTube", icon: "▶", url: "https://www.youtube.com/@BaharRaihan" },
-    { label: "TikTok", icon: "♪", url: "" },
-    { label: "LinkedIn", icon: "in", url: "" },
-    { label: "Instagram", icon: "◎", url: "" }
+    { label: "TikTok", icon: "♪", url: "https://www.tiktok.com/@baharwithoutlimits" },
+    { label: "LinkedIn", icon: "in", url: "https://www.linkedin.com/in/baharuddinraihan" },
+    { label: "Instagram", icon: "◎", url: "https://www.instagram.com/baharuddinraihan" }
   ],
 
   disclaimer: "Shared for inspiration and encouragement only. This is not medical advice and not a substitute for professional care. If you are in crisis or in danger, please contact your local emergency services or a qualified professional.",
