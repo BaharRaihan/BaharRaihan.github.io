@@ -17,6 +17,24 @@
 
   if (demo) $("demoBar").hidden = false;
 
+  // Filter buttons made from the categories found in a list
+  function filterable(filterEl, items, keyFn, draw) {
+    const cats = [...new Set(items.map(keyFn).filter(Boolean))];
+    let current = "All";
+    const render = () => draw(current === "All" ? items : items.filter((x) => keyFn(x) === current));
+    if (cats.length > 1) {
+      filterEl.innerHTML = ["All", ...cats].map((c) => `<button type="button" class="${c === "All" ? "on" : ""}" data-c="${esc(c)}">${esc(c)}</button>`).join("");
+      filterEl.addEventListener("click", (e) => {
+        const b = e.target.closest("button[data-c]");
+        if (!b) return;
+        current = b.dataset.c;
+        filterEl.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
+        render();
+      });
+    } else filterEl.hidden = true;
+    render();
+  }
+
   // ---- hero
   $("brandName").textContent = S.brand.appName;
   $("heroEyebrow").textContent = S.brand.subtitle;
@@ -26,10 +44,38 @@
   $("heroIntro").textContent = S.intro;
   const av = $("avatar");
   if (S.photo) av.style.backgroundImage = `url("${S.photo}")`; else av.textContent = [...S.name][0] || "?";
+  const socials = (S.social || []).filter((s) => s.url);
+  $("heroSocial").innerHTML = socials.map((s) => `<a href="${esc(link(s.url))}" target="_blank" rel="noopener" aria-label="${esc(s.label)}" title="${esc(s.label)}">${esc(s.icon || s.label[0])}</a>`).join("");
+
+  // ---- media wall
+  const media = real(S.media);
+  if (media.length) {
+    $("media").hidden = false;
+    filterable($("mediaFilter"), media, (m) => m.type, (list) => {
+      $("mediaBody").innerHTML = list.map((m) => `<article class="mcard"><div class="mtop"><span class="badge ${esc((m.type || "").toLowerCase())}">${esc(m.type)}</span><span class="mout">${esc(m.outlet)}${m.date ? " · " + esc(m.date) : ""}</span></div><h3>${esc(m.title)}</h3>${m.text ? `<p>${esc(m.text)}</p>` : ""}${m.url ? `<a href="${esc(link(m.url))}" target="_blank" rel="noopener">${m.type === "TV" ? "Watch" : "Read"} the story ↗</a>` : ""}${tag(m)}</article>`).join("");
+    });
+  } else $("heroMedia").hidden = true;
 
   // ---- story
   $("aboutBody").innerHTML = S.about.map((p) => `<p>${esc(p)}</p>`).join("");
-  $("timeline").innerHTML = S.journey.map((j) => `<li><span class="y">${esc(j.year)}</span><b>${esc(j.title)}</b><p>${esc(j.text)}</p></li>`).join("");
+  $("chapters").innerHTML = S.chapters.map((c, i) => {
+    const rel = media.filter((m) => m.chapter === c.key);
+    return `<article class="chapter c${i + 1} reveal" id="ch-${esc(c.key)}"><div class="cin"><div class="bignum" aria-hidden="true">${i + 1}</div><div class="ctag">Chapter ${i + 1} · ${esc(c.tag)}</div><h3>${esc(c.title)}</h3>${c.pull ? `<p class="pull">“${esc(c.pull)}”</p>` : ""}<div class="ctext">${c.text.map((p) => `<p>${esc(p)}</p>`).join("")}</div>${c.image ? `<figure class="cfig"><img src="${esc(c.image)}" alt="${esc(c.caption || c.title)}" loading="lazy">${c.caption ? `<figcaption>${esc(c.caption)}</figcaption>` : ""}</figure>` : demo ? `<figure class="cfig ph">Photo slot for this chapter (landscape, 1600 x 900). content.js → chapters → image</figure>` : ""}${rel.length ? `<div class="rel">In the news: ${rel.map((m) => m.url ? `<a href="${esc(link(m.url))}" target="_blank" rel="noopener">${esc(m.outlet)}</a>` : esc(m.outlet)).join(" · ")}</div>` : ""}</div></article>`;
+  }).join("");
+
+  // ---- ticker of outlets
+  const outlets = [...new Set(media.map((m) => m.outlet))];
+  if (outlets.length) {
+    $("ticker").hidden = false;
+    const row = outlets.concat(outlets).concat(outlets).map((o) => `<span>${esc(o)}</span>`).join("");
+    $("tickerTrack").innerHTML = `<div class="set">As seen in ★ ${row}</div>`;
+  }
+
+  // ---- gentle reveal on scroll (off if the phone asks for less motion)
+  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  } else document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in"));
 
   // ---- quotes (+ quote of the day)
   const quotes = real(S.quotes);
@@ -50,14 +96,16 @@
     $("achBody").innerHTML = ach.map((a) => `<div class="card ach">${a.year ? `<span class="year">${esc(a.year)}</span>` : ""}<b>${esc(a.title)}</b><p>${esc(a.text)}</p>${tag(a)}</div>`).join("");
   }
 
-  // ---- videos (click to load, so nothing from YouTube loads until you press play)
+  // ---- videos (click to load: nothing from YouTube loads until you press play)
   const vids = real(S.videos);
   if (vids.length) {
     $("videosSec").hidden = false;
-    $("videosBody").innerHTML = vids.map((v, i) => {
-      if (!v.id) return `<div class="vid placeholder"><div class="thumb"><span>▶</span></div><b>${esc(v.title)}</b><p>${esc(v.text || "")}</p>${tag(v)}</div>`;
-      return `<div class="vid${i === 0 ? " first" : ""}"><button class="thumb" data-v="${esc(v.id)}" aria-label="Play: ${esc(v.title)}" style="background-image:url('https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg')"><span>▶</span></button><b>${esc(v.title)}</b><p>${esc(v.text || "")}</p></div>`;
-    }).join("");
+    filterable($("videoFilter"), vids, (v) => v.category, (list) => {
+      $("videosBody").innerHTML = list.map((v, i) => {
+        if (!v.id) return `<div class="vid placeholder"><div class="thumb"><span>▶</span></div><b>${esc(v.title)}</b><p>${esc(v.text || "")}</p>${tag(v)}</div>`;
+        return `<div class="vid${i === 0 ? " first" : ""}"><button class="thumb" data-v="${esc(v.id)}" aria-label="Play: ${esc(v.title)}" style="background-image:url('https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg')"><span>▶</span></button><b>${esc(v.title)}</b><p>${esc(v.text || "")}</p></div>`;
+      }).join("");
+    });
     $("videosBody").addEventListener("click", (e) => {
       const b = e.target.closest("button[data-v]");
       if (!b) return;
@@ -67,7 +115,6 @@
       f.allowFullscreen = true;
       f.title = "Video";
       b.replaceWith(f);
-      f.parentElement.classList.add("playing");
     });
   }
 
@@ -75,15 +122,16 @@
   const pics = real(S.gallery);
   if (pics.length) {
     $("gallerySec").hidden = false;
-    $("galleryBody").innerHTML = pics.map((p, i) => p.src
-      ? `<button class="tile" data-i="${i}" aria-label="${esc(p.caption)}"><img src="${esc(p.src)}" alt="${esc(p.caption)}" loading="lazy"></button>`
-      : `<div class="tile ph"><span>${esc(p.caption)}</span>${tag(p)}</div>`).join("");
     const dlg = $("photoDlg");
+    filterable($("galleryFilter"), pics, (p) => p.category, (list) => {
+      $("galleryBody").innerHTML = list.map((p) => p.src
+        ? `<button class="tile" data-s="${esc(p.src)}" data-cap="${esc(p.caption)}" aria-label="${esc(p.caption)}"><img src="${esc(p.src)}" alt="${esc(p.caption)}" loading="lazy"></button>`
+        : `<div class="tile ph"><b>${esc(p.category || "")}</b><span>${esc(p.caption)}</span>${tag(p)}</div>`).join("");
+    });
     $("galleryBody").addEventListener("click", (e) => {
       const t = e.target.closest("button.tile");
       if (!t) return;
-      const p = pics[+t.dataset.i];
-      $("photoImg").src = p.src; $("photoImg").alt = p.caption; $("photoCap").textContent = p.caption;
+      $("photoImg").src = t.dataset.s; $("photoImg").alt = t.dataset.cap; $("photoCap").textContent = t.dataset.cap;
       dlg.showModal();
     });
     dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
@@ -98,11 +146,7 @@
   $("trainBody").innerHTML = S.training.map((a) => `<li>${esc(a)}</li>`).join("");
   $("skills").innerHTML = S.skills.map((s) => `<span>${esc(s)}</span>`).join("");
 
-  // ---- news, updates, contact
-  if (S.press && S.press.length) {
-    $("pressSec").hidden = false;
-    $("press").innerHTML = S.press.map((p) => `<a class="card" style="text-decoration:none;color:inherit" href="${esc(link(p.url))}" target="_blank" rel="noopener"><small>${esc(p.source)} · ${esc(p.date)}</small><b>${esc(p.title)} ↗</b></a>`).join("");
-  }
+  // ---- updates, contact
   const ups = real(S.updates);
   if (ups.length) {
     $("updatesSec").hidden = false;
@@ -110,11 +154,22 @@
   }
   $("contactBody").innerHTML =
     `<p>📧 <a href="mailto:${esc(S.email)}">${esc(S.email)}</a></p>${S.phone ? `<p>📞 ${esc(S.phone)}</p>` : ""}` +
-    `<p>${S.social.map((s) => `<a href="${esc(link(s.url))}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join(" · ")}</p>`;
+    (socials.length ? `<p>${socials.map((s) => `<a href="${esc(link(s.url))}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join(" · ")}</p>` : "");
 
   // ---- nav shows only sections that are visible
-  const nav = [["story", "Story"], ["achSec", "Achievements"], ["quotesSec", "Quotes"], ["videosSec", "Videos"], ["gallerySec", "Moments"], ["work", "Work"], ["contact", "Connect"]];
-  $("navLinks").innerHTML = nav.filter(([id]) => !$(id).hidden).map(([id, t]) => `<a href="#${id}">${t}</a>`).join("") + `<a href="cv.html">CV</a>`;
+  const nav = [["media", "In the news"], ["story", "Story"], ["achSec", "Achievements"], ["videosSec", "Videos"], ["gallerySec", "Moments"], ["work", "Work"], ["contact", "Connect"]];
+  $("navLinks").innerHTML = nav.filter(([id]) => !$(id).hidden).map(([id, t]) => `<a href="#${id}">${t}</a>`).join("") + `<a href="cv.html" class="cvlink">CV</a>`;
+
+  // ---- demo only: show which content.js field feeds each section
+  if (demo) {
+    const where = { media: "media", story: "about + chapters (title, pull, text, image)", achSec: "achievements", videosSec: "videos", gallerySec: "gallery", quotesSec: "quotes", work: "work + works + experience", learn: "education + training + skills", updatesSec: "updates", contact: "email + social" };
+    Object.entries(where).forEach(([id, f]) => {
+      const h = document.querySelector("#" + id + " h2");
+      if (h) h.insertAdjacentHTML("beforeend", `<span class="slot">content.js → ${f}</span>`);
+    });
+    const hs = [["heroName", "name"], ["heroHeadline", "headline"], ["heroIntro", "intro"], ["heroRoles", "roles"]];
+    hs.forEach(([id, f]) => $(id).insertAdjacentHTML("afterend", `<span class="slot" style="display:block;width:max-content;margin:2px auto 0">content.js → ${f}</span>`));
+  }
 
   // ---- footer
   $("disclaimer").textContent = S.disclaimer;
@@ -143,10 +198,12 @@
 
   function renderCV() {
     const w = S.work;
+    const soc = (S.social || []).filter((s) => s.url).map((s) => `${esc(s.label)}: ${esc(s.url)}`).join(" · ");
     $("cv").innerHTML = `
       <h1>${esc(S.name)}</h1>
       <p class="sub">${esc(S.tagline)}</p>
       <p class="sub">📍 ${esc(S.location)} · 📧 ${esc(S.email)}${S.phone ? " · 📞 " + esc(S.phone) : ""}</p>
+      ${soc ? `<p class="sub small">${soc}</p>` : ""}
       <h2>Profile</h2>${S.about.map((p) => `<p>${esc(p)}</p>`).join("")}
       <h2>Current Work</h2><div class="row"><b>${esc(w.title)}, ${esc(w.org)}</b><span>${esc(w.since)}</span></div><p>${esc(w.description)}</p>
       <h2>Experience</h2>${S.experience.map((x) => `<div class="row"><b>${esc(x.title)}, ${esc(x.org)}</b><span>${esc(x.period)}</span></div><p>${esc(x.text)}</p>`).join("")}
@@ -154,6 +211,7 @@
       <h2>Training</h2><ul>${S.training.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
       <h2>Awards</h2><ul>${S.awards.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
       <h2>Advocacy and Community Work</h2>${S.advocacy.map((a) => `<p><b>${esc(a.title)}:</b> ${esc(a.text)}</p>`).join("")}
+      <h2>In the Media</h2><ul>${(S.media || []).filter((m) => !m.sample).map((m) => `<li>${esc(m.outlet)} (${esc(m.type)}), ${esc(m.date)}: ${esc(m.title)}</li>`).join("")}</ul>
       <h2>Skills</h2><p>${S.skills.map(esc).join(" · ")}</p>
       <h2>Languages</h2><p>${S.languages.map(esc).join(" · ")}</p>
       <h2>Life Journey</h2>${S.journey.map((j) => `<p><b>${esc(j.year)} — ${esc(j.title)}:</b> ${esc(j.text)}</p>`).join("")}`;

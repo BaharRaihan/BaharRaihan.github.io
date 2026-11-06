@@ -4,8 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bahar Uddin Raihan | My Story</title>
-<meta name="description" content="The story, strength and journey of Bahar Uddin Raihan: words of courage, achievements, work, photos and videos.">
-<meta name="theme-color" content="#0f766e">
+<meta name="description" content="The story, strength and journey of Bahar Uddin Raihan: seen on TV and in newspapers, achievements, work, photos and videos.">
+<meta name="theme-color" content="#00523c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bahar Uddin Raihan | My Story">
+<meta property="og:description" content="Your circumstances do not decide your story. You do. Seen on TV and in newspapers across Bangladesh.">
+<meta property="og:url" content="https://baharraihan.github.io/">
+<meta property="og:image" content="https://baharraihan.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -30,48 +36,58 @@
     <p class="headline" id="heroHeadline"></p>
     <p class="intro" id="heroIntro"></p>
     <div class="actions">
-      <a class="btn" href="#story">Read my story</a>
-      <a class="btn ghost" id="heroSecond" href="cv.html">View CV</a>
+      <a class="btn" href="#media" id="heroMedia">See me in the news</a>
+      <a class="btn ghost" href="cv.html"><span aria-hidden="true">⬇</span> Professional CV</a>
     </div>
+    <div id="heroSocial" class="social"></div>
   </section>
+
+  <div id="ticker" class="ticker" hidden><div id="tickerTrack" class="track"></div></div>
 
   <section id="qotd" class="wrap" hidden>
     <figure class="qotd"><figcaption>Today's words of strength</figcaption><blockquote id="qotdText"></blockquote><cite id="qotdSrc"></cite></figure>
   </section>
 
-  <section id="story" class="wrap">
-    <h2>My Story</h2>
-    <div id="aboutBody"></div>
-    <h3>The road so far</h3><ol id="timeline" class="timeline"></ol>
+  <section id="media" class="wrap" hidden>
+    <h2>As seen on TV and in newspapers</h2>
+    <div id="mediaFilter" class="filter"></div>
+    <div id="mediaBody" class="mediawall"></div>
+  </section>
+
+  <section id="story">
+    <div class="wrap"><h2>My story in four chapters</h2><div id="aboutBody" class="lead"></div></div>
+    <div id="chapters"></div>
   </section>
 
   <section id="achSec" class="wrap" hidden><h2>Achievements</h2><div id="achBody" class="grid"></div></section>
 
-  <section id="quotesSec" class="wrap" hidden><h2>Words of Strength</h2><div id="quotesBody" class="quotes"></div></section>
+  <section id="videosSec" class="wrap" hidden><h2>Videos</h2><div id="videoFilter" class="filter"></div><div id="videosBody" class="videos"></div></section>
 
-  <section id="videosSec" class="wrap" hidden><h2>Videos</h2><div id="videosBody" class="videos"></div></section>
+  <section id="gallerySec" class="wrap" hidden><h2>Moments</h2><div id="galleryFilter" class="filter"></div><div id="galleryBody" class="gallery"></div></section>
 
-  <section id="gallerySec" class="wrap" hidden><h2>Moments</h2><div id="galleryBody" class="gallery"></div></section>
+  <section id="quotesSec" class="wrap" hidden><h2>Words of strength</h2><div id="quotesBody" class="quotes"></div></section>
 
   <section id="work" class="wrap">
-    <h2>Work and Service</h2>
+    <h2>Work and service</h2>
     <div id="workBody" class="card"></div>
     <div id="worksBody" class="cards"></div>
     <h3>Experience</h3><div id="expBody" class="cards"></div>
   </section>
 
   <section id="learn" class="wrap">
-    <h2>Education and Training</h2>
+    <h2>Education and training</h2>
     <div id="edu" class="cards"></div>
     <ul id="trainBody" class="plain"></ul>
     <div id="skills" class="chips"></div>
   </section>
 
-  <section id="pressSec" class="wrap" hidden><h2>In the News</h2><div id="press" class="cards"></div></section>
-
   <section id="updatesSec" class="wrap" hidden><h2>Latest</h2><div id="feed" class="cards"></div></section>
 
-  <section id="contact" class="wrap"><h2>Connect</h2><div id="contactBody" class="card"></div></section>
+  <section id="contact" class="wrap">
+    <h2>Connect</h2>
+    <div id="contactBody" class="card"></div>
+    <a class="cvcard" href="cv.html"><b>Professional CV</b><span>Open, print or save as PDF. Share this link with any company: baharraihan.github.io/cv.html</span></a>
+  </section>
 </main>
 
 <footer>

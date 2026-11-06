@@ -3,19 +3,22 @@
 //  Edit here -> website, CV and app all update.
 //
 //  HOW TO ADD NEW THINGS (put the newest at the TOP of each list):
+//   - media         : { outlet, type: "TV" | "Newspaper" | "Online", date, title, text, url, chapter }
+//   - videos        : { id: "YouTubeVideoID", title, text, category }
+//   - gallery       : { src: "images/name.jpg", caption, category }
 //   - quotes        : { text, source, date }
 //   - achievements  : { title, text, year }
 //   - works         : { title, text, year, link }
-//   - gallery       : { src: "images/name.jpg", caption }
-//   - videos        : { id: "YouTubeVideoID", title, text }
 //   - updates       : { date, place, text, image }
+//   chapter  = which of the four story chapters the item belongs to: "journey" | "obstacles" | "forward" | "work"
+//   category = any short word you like, e.g. "Leadership", "Social work", "Workplace", "Travel". Filter buttons are made automatically.
 //
 //  Items with  sample: true  are PLACEHOLDERS. They only appear on your own computer
 //  (localhost) or when you add ?demo=1 to the address. They NEVER show on the live site.
 //  Delete the sample lines when you add real ones. A section with no real items hides itself.
 // ============================================================
 window.SITE = {
-  brand: { appName: "My Story", subtitle: "Mental Wellness Hub" },
+  brand: { appName: "My Story", subtitle: "Mental wellness hub" },
 
   name: "Bahar Uddin Raihan",
   tagline: "Graduated with a Master's by writing with a pen in his mouth",
@@ -28,18 +31,46 @@ window.SITE = {
   phone: "",                       // left empty on purpose: phone is not shown publicly
 
   about: [
-    "I am Bahar Uddin Raihan. In 2004, while in fifth grade, I was electrocuted and lost one hand entirely and the other up to the elbow. I did not stop. Holding a pen in my mouth and using my elbow, I kept studying and earned a Master's degree in History from the University of Chittagong.",
-    "I work on computers, ride a motorcycle, skate, and do my daily tasks on my own. This space exists to show my journey to the world, so that people, especially people with disabilities, can find courage."
+    "I am Bahar Uddin Raihan. I was born in Bangladesh, and in 2004 I lost both of my hands in an electrical accident. I did not stop. Holding a pen in my mouth and using my elbow, I kept studying and earned a Master's degree in History from the University of Chittagong.",
+    "Today I travel across the country on my own, work, and try to motivate people. I share my journey with the world so that people, especially people with disabilities, can find the strength to keep going."
   ],
 
-  // Words of strength. Add your own sayings here.
+  // The story in four chapters, in your own words.
+  //  pull  = the one big sentence shown in large type
+  //  image = optional photo for the chapter, e.g. "images/ch2.jpg" (caption = its caption)
+  chapters: [
+    { key: "journey", title: "My journey", tag: "Where it began", pull: "In 2004, in an electrical accident, I lost both of my hands.", image: "", caption: "", text: [
+      "I was born in Bangladesh. In 2004, in an electrical accident, I lost both of my hands.",
+      "My story has been covered by television channels and newspapers across Bangladesh."
+    ]},
+    { key: "obstacles", title: "Obstacles on the path", tag: "What stood in the way", pull: "Every day on the road I crossed thousands of obstacles.", image: "", caption: "", text: [
+      "After I lost both hands I was bewildered. How would I earn a living and survive? There was no one in my family except my mother and me. We rose from deep poverty, and my mother had no money either. My maternal uncles, from my mother's family home, paid for all the costs of my accident.",
+      "Then came the question of studying again: finding the money, and finding the mental strength to carry on. I had to rise above hurtful remarks from society, and every day on the road I crossed thousands of obstacles."
+    ]},
+    { key: "forward", title: "Moving forward", tag: "Step by step", pull: "I carried on and completed both my Honours and my Master's degrees.", image: "", caption: "", text: [
+      "With mental strength I carried on through my Honours and Master's degrees and completed both at the University of Chittagong, a well-known public university in Bangladesh. In the context of Bangladesh this is a very challenging thing to do. Facing the challenges at each stage, step by step, can be almost impossible even for an ordinary person.",
+      "Along the way I took on social leadership and never held myself back. I built my skills, found ways to stay busy and growing, and I have shown success in the organisations where I have worked."
+    ]},
+    { key: "work", title: "My work", tag: "What I do today", pull: "Even without both hands, I travel across the whole country without anyone's help.", image: "", caption: "", text: [
+      "Every day I try to motivate people: how to keep going in the battle of life, and how much further you can go if you keep confidence in yourself.",
+      "Even without both hands, I travel across the whole country without anyone's help, to the hills and on river trips. And I am working on how a person can build themselves as a normal person, without thinking of themselves as disabled."
+    ]}
+  ],
+
+  // As seen on TV and in newspapers. Add every news item here (newest first).
+  media: [
+    { outlet: "Prothom Alo", type: "Newspaper", date: "4 May 2023", title: "Pen held in mouth, writing with his elbow: Bahar Uddin passes his Master's", text: "Coverage of completing a Master's degree in History at the University of Chittagong.", url: "https://www.prothomalo.com/bangladesh/d58c2ai4dp", chapter: "forward" },
+    { outlet: "Desh Rupantor", type: "Newspaper", date: "17 May 2023", title: "Indomitable Rayhan", text: "Coverage of the appointment as Training Coordinator at the University of Dhaka.", url: "https://www.deshrupantor.com/426118/%E0%A6%85%E0%A6%A6%E0%A6%AE%E0%A7%8D%E0%A6%AF-%E0%A6%B0%E0%A6%BE%E0%A7%9F%E0%A6%B9%E0%A6%BE%E0%A6%A8", chapter: "forward" },
+    { outlet: "Prothom Alo", type: "Newspaper", date: "23 June 2021", title: "Feature on SIM registration for people without fingerprints", text: "A major feature on the problem I raised about biometric SIM registration.", url: "", chapter: "work" },
+    { outlet: "Your TV channel", type: "TV", date: "2024", title: "A sample TV news item", text: "Add the channel name, date and link of each TV report here.", url: "", chapter: "journey", sample: true },
+    { outlet: "Your online news site", type: "Online", date: "2025", title: "A sample online news item", text: "Add online news here.", url: "", chapter: "obstacles", sample: true }
+  ],
+
   quotes: [
     { text: "Your own words go here: one short line that could lift someone up on a hard day.", source: "Bahar Uddin Raihan", date: "", sample: true },
-    { text: "A second sample quote. Replace it, or delete it, when you add your real ones.", source: "Bahar Uddin Raihan", date: "", sample: true },
-    { text: "A third sample quote, to show how a list of quotes looks.", source: "Bahar Uddin Raihan", date: "", sample: true }
+    { text: "A second sample quote. Replace it, or delete it, when you add your real ones.", source: "Bahar Uddin Raihan", date: "", sample: true }
   ],
 
-  // Things you have achieved. Add real ones.
   achievements: [
     { title: "Master's degree in History", text: "Completed at the University of Chittagong, writing several exams myself with a pen held in my mouth.", year: "2021" },
     { title: "Best Participant Award", text: "Leadership Training Committee.", year: "2019" },
@@ -48,24 +79,26 @@ window.SITE = {
     { title: "Your next achievement", text: "A short sentence about what you achieved and why it matters.", year: "2026", sample: true }
   ],
 
-  // The work you do: projects, campaigns, talks.
   works: [
     { title: "Mobile SIM registration for people without fingerprints", text: "I advocated for the rights of persons with disabilities to access mobile communication services. The problem received national attention in a major feature in The Daily Prothom Alo (23 June 2021) and prompted discussion with regulators such as the BTRC.", year: "2021" },
     { title: "“Smile for Children” project", text: "As coordinator I led a community initiative to improve access to education and well-being support for underprivileged children, ran awareness campaigns on children's rights and inclusive education, and trained volunteers on child protection and inclusion.", year: "" },
     { title: "Your next project or talk", text: "Describe a piece of work in one or two sentences.", year: "2026", link: "", sample: true }
   ],
 
-  // Photos. Put image files in the "images" folder and list them here.
-  gallery: [
-    { src: "", caption: "Sample photo caption: where and when this photo was taken.", sample: true },
-    { src: "", caption: "Another sample photo.", sample: true },
-    { src: "", caption: "A third sample photo.", sample: true }
+  // Videos: the first is featured. Use the YouTube ID (the part after v= in the link).
+  videos: [
+    { id: "zzCbfST_Ztw", title: "Where there is a will, everything is possible", text: "A video feature about my journey.", category: "Featured" },
+    { id: "", title: "A sample TV news video", text: "Add the YouTube ID of each video.", category: "TV news", sample: true },
+    { id: "", title: "A sample skills video", text: "Videos about each of my skills and activities.", category: "Skills", sample: true }
   ],
 
-  // Videos. The first one is featured. Use the YouTube ID (the part after v= in the link).
-  videos: [
-    { id: "zzCbfST_Ztw", title: "Where there is a will, everything is possible", text: "A video feature about my journey." },
-    { id: "", title: "A sample video title", text: "Add the YouTube ID of another video to show it here.", sample: true }
+  // Photos: leadership work, social work, workplace, travel, press clippings. Put files in the "images" folder.
+  gallery: [
+    { src: "", caption: "Sample: leading a community programme.", category: "Leadership", sample: true },
+    { src: "", caption: "Sample: social work in the field.", category: "Social work", sample: true },
+    { src: "", caption: "Sample: at my workplace.", category: "Workplace", sample: true },
+    { src: "", caption: "Sample: travelling to the hills.", category: "Travel", sample: true },
+    { src: "", caption: "Sample: a newspaper clipping.", category: "Press clippings", sample: true }
   ],
 
   work: {
@@ -84,7 +117,7 @@ window.SITE = {
 
   education: [
     { title: "M.A. in History", place: "University of Chittagong", year: "2021", note: "CGPA 3.13 out of 4; I wrote several exams myself with a pen held in my mouth" },
-    { title: "B.A. in History", place: "University of Chittagong", year: "2020", note: "" },
+    { title: "B.A. (Honours) in History", place: "University of Chittagong", year: "2020", note: "" },
     { title: "HSC, Arts & Humanities", place: "Chakaria College", year: "2016", note: "" },
     { title: "SSC, Business Studies", place: "Chakaria Govt. High School", year: "2014", note: "" }
   ],
@@ -96,8 +129,8 @@ window.SITE = {
   ],
 
   journey: [
-    { year: "Childhood", title: "Under my maternal family's care", text: "My mother worked as a farmer in Chakaria, Cox's Bazar, to keep the household going. I grew up with the help of my maternal grandparents, uncles and relatives." },
-    { year: "2004", title: "The accident that changed my life", text: "In fifth grade I was electrocuted at an electric transformer. At Chittagong Medical College Hospital, one of my hands was amputated entirely and the other up to the elbow." },
+    { year: "Childhood", title: "Under my maternal family's care", text: "My family was only my mother and me. My mother worked as a farmer in Chakaria, Cox's Bazar, to keep the household going, and I grew up with the help of my maternal grandparents, uncles and relatives." },
+    { year: "2004", title: "The accident that changed my life", text: "In fifth grade I was electrocuted at an electric transformer and lost both of my hands. My maternal uncles paid for my treatment at Chittagong Medical College Hospital." },
     { year: "Afterwards", title: "Learning everything again", text: "I learned to write with a pen in my mouth, type on a computer, ride a motorcycle and skate." },
     { year: "2021", title: "Master's completed", text: "I completed my Master's in the Department of History, University of Chittagong, after earning my B.A. there in 2020." },
     { year: "2023", title: "Recognition and a job", text: "Prothom Alo and Desh Rupantor published my story. After years of trying to find work, I was appointed Training Coordinator for the EDGE project at PMIS, University of Dhaka. I am working towards my dream of living together with my mother." },
@@ -116,23 +149,21 @@ window.SITE = {
     { title: "“Smile for Children” project", text: "As coordinator I led a community initiative to improve access to education and well-being support for underprivileged children, ran awareness campaigns on children's rights and inclusive education, and trained volunteers on child protection and inclusion." }
   ],
 
-  press: [
-    { title: "Pen held in mouth, writing with his elbow: Bahar Uddin passes his Master's", source: "Prothom Alo", date: "4 May 2023", url: "https://www.prothomalo.com/bangladesh/d58c2ai4dp" },
-    { title: "Indomitable Rayhan", source: "Desh Rupantor", date: "17 May 2023", url: "https://www.deshrupantor.com/426118/%E0%A6%85%E0%A6%A6%E0%A6%AE%E0%A7%8D%E0%A6%AF-%E0%A6%B0%E0%A6%BE%E0%A7%9F%E0%A6%B9%E0%A6%BE%E0%A6%A8" }
-  ],
-
   updates: [
-    { date: "2026-11-05", place: "Bangladesh", text: "Work started on this website and app.", image: "" }
+    { date: "2026-11-07", place: "Bangladesh", text: "Work started on this website and app.", image: "" }
   ],
 
+  // Social accounts. An entry with an empty url is hidden. Add the real links.
   social: [
-    { label: "YouTube (Bahar Rayhan)", url: "https://www.youtube.com/@BaharRaihan" },
-    { label: "Facebook", url: "https://www.facebook.com/Our.Raihan" }
+    { label: "Facebook", icon: "f", url: "https://www.facebook.com/Our.Raihan" },
+    { label: "YouTube", icon: "▶", url: "https://www.youtube.com/@BaharRaihan" },
+    { label: "TikTok", icon: "♪", url: "" },
+    { label: "LinkedIn", icon: "in", url: "" },
+    { label: "Instagram", icon: "◎", url: "" }
   ],
 
   disclaimer: "Shared for inspiration and encouragement only. This is not medical advice and not a substitute for professional care. If you are in crisis or in danger, please contact your local emergency services or a qualified professional.",
 
-  // Support: deliberately small and quiet
   support: {
     enabled: true,
     message: "If you like this site, you may support me a little if you wish. It is entirely optional. Your prayers and kindness are more than enough.",
