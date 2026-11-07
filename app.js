@@ -121,9 +121,23 @@
     const q = quotes[day % quotes.length];
     $("qotd").hidden = false;
     $("qotdText").textContent = "“" + q.text + "”";
-    $("qotdSrc").textContent = "— " + (q.source || S.name);
+    $("qotdSrc").innerHTML = "— " + (q.url ? `<a href="${esc(link(q.url))}" target="_blank" rel="noopener">${esc(q.source || S.name)}${q.date ? ", " + esc(q.date) : ""}</a>` : esc(q.source || S.name));
     $("quotesSec").hidden = false;
-    $("quotesBody").innerHTML = quotes.map((x) => `<figure class="q"><blockquote>“${esc(x.text)}”</blockquote><cite>— ${esc(x.source || S.name)}${x.date ? ", " + esc(x.date) : ""}</cite>${tag(x)}</figure>`).join("");
+    const qCard = (x) => `<figure class="q"><blockquote>“${esc(x.text)}”</blockquote><cite>— ${x.url ? `<a href="${esc(link(x.url))}" target="_blank" rel="noopener">${esc(x.source || S.name)}${x.date ? ", " + esc(x.date) : ""}</a>` : esc(x.source || S.name) + (x.date ? ", " + esc(x.date) : "")}</cite>${tag(x)}</figure>`;
+    const QLIMIT = 6;
+    let qAll = false;
+    const drawQuotes = () => {
+      $("quotesBody").innerHTML = (qAll ? quotes : quotes.slice(0, QLIMIT)).map(qCard).join("") + (!qAll && quotes.length > QLIMIT ? `<button type="button" id="moreQuotes" class="more">Show all ${quotes.length} quotes</button>` : "");
+    };
+    drawQuotes();
+    $("quotesBody").addEventListener("click", (e) => { if (e.target.closest("#moreQuotes")) { qAll = true; drawQuotes(); } });
+  }
+
+  // ---- what colleagues say
+  const others = real(S.others);
+  if (others.length) {
+    $("othersSec").hidden = false;
+    $("othersBody").innerHTML = others.map((x) => `<figure class="q"><blockquote>“${esc(x.text)}”</blockquote><cite>— ${esc(x.source || "")}</cite>${tag(x)}</figure>`).join("");
   }
 
   // ---- achievements
@@ -196,7 +210,7 @@
     (socials.length ? `<div class="cgrid">${socials.map((s) => { const k = ICON.kind(s.label); return `<a class="clink ${k}" href="${esc(link(s.url))}" target="_blank" rel="noopener">${ICON.tile(k)}<span class="ct"><b>${esc(s.label.replace(/\s*\(.*\)/, ""))}</b><small>${esc(ICON.hint[k] || "Open")}</small></span></a>`; }).join("")}</div>` : "");
 
   // ---- nav shows only sections that are visible
-  const nav = [["media", "In the news"], ["story", "Story"], ["achSec", "Achievements"], ["videosSec", "Videos"], ["gallerySec", "Moments"], ["work", "Work"], ["contact", "Connect"]];
+  const nav = [["media", "In the news"], ["story", "Story"], ["achSec", "Achievements"], ["videosSec", "Videos"], ["gallerySec", "Moments"], ["quotesSec", "Quotes"], ["work", "Work"], ["contact", "Connect"]];
   $("navLinks").innerHTML = nav.filter(([id]) => !$(id).hidden).map(([id, t]) => `<a href="#${id}">${t}</a>`).join("") + `<a href="cv.html" class="cvlink">CV</a>`;
 
   // ---- demo only: show which content.js field feeds each section

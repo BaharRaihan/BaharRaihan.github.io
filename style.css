@@ -167,3 +167,7 @@ body[data-page=cv] .btn,body[data-page=privacy] .btn{background:var(--yellow)}
 .mframe{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000;margin:4px 0 12px;display:block}
 .more{display:block;width:100%;font:inherit;font-weight:800;font-size:16px;padding:14px;border:2px solid var(--ink);border-radius:14px;background:var(--ink);color:#fff;cursor:pointer;box-shadow:5px 5px 0 var(--redbright)}
 .more:hover{filter:brightness(1.15)}
+.qotd cite a,.q cite a{color:inherit;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.q{border-left-color:var(--green)}.q:nth-child(4n+2){border-left-color:var(--blue)}.q:nth-child(4n+3){border-left-color:var(--amber)}.q:nth-child(4n+4){border-left-color:var(--redbright)}
+.others .q{background:#eef7f1;border-left-color:var(--green)}
+.quotes .more{margin-top:4px}

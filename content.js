@@ -6,7 +6,7 @@
 //   - media         : { outlet, type: "TV" | "Newspaper" | "Online", date, title, text, url, chapter }
 //   - videos        : { id: "YouTubeVideoID", title, text, category }
 //   - gallery       : { src: "images/name.jpg", thumb: "images/name-thumb.jpg" (optional square preview), caption, category }
-//   - quotes        : { text, source, date }
+//   - quotes        : { text, source, date, url (optional: link to where it was said) }
 //   - achievements  : { title, text, year }
 //   - works         : { title, text, year, link }
 //   - updates       : { date, place, text, image }
@@ -105,8 +105,32 @@ window.SITE = {
   },
 
   quotes: [
-    { text: "Your own words go here: one short line that could lift someone up on a hard day.", source: "Bahar Uddin Raihan", date: "", sample: true },
-    { text: "A second sample quote. Replace it, or delete it, when you add your real ones.", source: "Bahar Uddin Raihan", date: "", sample: true }
+    // Real words, as quoted in the press (translated from Bangla). Each links to the article where it appeared.
+    { text: "I have managed to stay in the race with able-bodied people through the strength of my willpower.", source: "Bahar Uddin Raihan, to Samakal", date: "May 2025", url: "https://samakal.com/kisualonil/article/297100/%E0%A6%AE%E0%A7%81%E0%A6%96-%E0%A6%A6%E0%A6%BF%E0%A7%9F%E0%A7%87-%E0%A6%B2%E0%A6%BF%E0%A6%96%E0%A7%87-%E0%A6%B8%E0%A7%8D%E0%A6%A8%E0%A6%BE%E0%A6%A4%E0%A6%95%E0%A7%8B%E0%A6%A4%E0%A7%8D%E0%A6%A4%E0%A6%B0-%E0%A6%AA%E0%A6%BE%E0%A6%B8-%E0%A6%95%E0%A6%B0%E0%A7%87%E0%A6%9B%E0%A7%87%E0%A6%A8-%E0%A6%AC%E0%A6%BE%E0%A6%B9%E0%A6%BE%E0%A6%B0" },
+    { text: "I have faced many obstacles in life. Socially, in moving around, in my studies, even at work, I met barriers at every step.", source: "Bahar Uddin Raihan, to Samakal", date: "May 2025", url: "https://samakal.com/kisualonil/article/297100/%E0%A6%AE%E0%A7%81%E0%A6%96-%E0%A6%A6%E0%A6%BF%E0%A7%9F%E0%A7%87-%E0%A6%B2%E0%A6%BF%E0%A6%96%E0%A7%87-%E0%A6%B8%E0%A7%8D%E0%A6%A8%E0%A6%BE%E0%A6%A4%E0%A6%95%E0%A7%8B%E0%A6%A4%E0%A7%8D%E0%A6%A4%E0%A6%B0-%E0%A6%AA%E0%A6%BE%E0%A6%B8-%E0%A6%95%E0%A6%B0%E0%A7%87%E0%A6%9B%E0%A7%87%E0%A6%A8-%E0%A6%AC%E0%A6%BE%E0%A6%B9%E0%A6%BE%E0%A6%B0" },
+    { text: "I received my teachers' blessings and affection, and that helped me keep my morale up in my studies.", source: "Bahar Uddin Raihan, to Samakal", date: "May 2025", url: "https://samakal.com/kisualonil/article/297100/%E0%A6%AE%E0%A7%81%E0%A6%96-%E0%A6%A6%E0%A6%BF%E0%A7%9F%E0%A7%87-%E0%A6%B2%E0%A6%BF%E0%A6%96%E0%A7%87-%E0%A6%B8%E0%A7%8D%E0%A6%A8%E0%A6%BE%E0%A6%A4%E0%A6%95%E0%A7%8B%E0%A6%A4%E0%A7%8D%E0%A6%A4%E0%A6%B0-%E0%A6%AA%E0%A6%BE%E0%A6%B8-%E0%A6%95%E0%A6%B0%E0%A7%87%E0%A6%9B%E0%A7%87%E0%A6%A8-%E0%A6%AC%E0%A6%BE%E0%A6%B9%E0%A6%BE%E0%A6%B0" },
+    { text: "If you want it with all your heart, no task is impossible, even without hands.", source: "Bahar Uddin Raihan, to Prothom Alo", date: "May 2023", url: "https://www.prothomalo.com/bangladesh/d58c2ai4dp" },
+    { text: "I can do any work if I want to. To prove it, I learned to ride a motorcycle. I skate.", source: "Bahar Uddin Raihan, to Prothom Alo", date: "May 2023", url: "https://www.prothomalo.com/bangladesh/d58c2ai4dp" },
+    // His own words from video interviews (translated from Bangla).
+    { text: "You don't need hands to ride a bike.", source: "Bahar Uddin Raihan", date: "" },
+    { text: "I want people to clear their minds of thoughts like “I don't have this, I don't have that, I can't do it, it isn't possible for me”, and to believe that one person can do everything, if they want to.", source: "Bahar Uddin Raihan", date: "" },
+    { text: "I never considered any obstacle to be an obstacle.", source: "Bahar Uddin Raihan", date: "" },
+    { text: "I thought: if Allah had created all seven billion people on earth without hands, would the world have been built to be used the way it is now? That is how I thought about it.", source: "Bahar Uddin Raihan", date: "" },
+    { text: "Thinking that nobody has hands, I built the system my own way.", source: "Bahar Uddin Raihan", date: "" },
+    { text: "I was not a physically disabled person from birth.", source: "Bahar Uddin Raihan", date: "" },
+    { text: "When their words reached my ears, I would think: wait a little, I will show you.", source: "Bahar Uddin Raihan", date: "" },
+    { text: "“The poor fellow has no option but begging, because how will he live! He has no father, only a mother, no brother, no sister, who will feed him?” That kind of bullying used to reach me.", source: "Bahar Uddin Raihan", date: "" },
+    { text: "When it turned out that my writing was somewhat readable... my confidence came back: yes, I can do it.", source: "Bahar Uddin Raihan", date: "" },
+    { text: "I rode a bicycle through the whole of my high school life, because it was not possible for me to go to school paying two taka, two taka, four taka for the shared “Chander gari” vehicles.", source: "Bahar Uddin Raihan", date: "" },
+    { text: "I bought a bicycle for 700 taka and went to school on it.", source: "Bahar Uddin Raihan", date: "" },
+    { text: "It is unbelievable: my friend was always behind me... I could tell how much he trusted me, going to school behind me.", source: "Bahar Uddin Raihan", date: "" }
+  ],
+
+  // What colleagues say about him, from video reports (translated from Bangla).
+  others: [
+    { text: "We have been learning a lot from him for a long time, whether in work or in family matters...", source: "A colleague, in a video report" },
+    { text: "In his work, there is nothing like his work falling behind because of his physical disability.", source: "A colleague, in a video report" },
+    { text: "Many people in this situation actually suffer from despair... but he did not do that. He showed courage, studied, came into employment, and is working.", source: "A colleague, in a video report" }
   ],
 
   achievements: [
@@ -147,14 +171,14 @@ window.SITE = {
 
   work: {
     title: "Project Officer",
-    org: "BRAC",
+    org: "BRAC, Humanitarian Crisis Management Programme",
     since: "Since June 2026",
-    description: "I earn my living from my salary. Earlier work: In May 2023 I received my appointment letter at the ICT Tower from the State Minister for ICT and joined the EDGE project at the Centre for Project Management and Information Systems (PMIS), University of Dhaka, as Training Coordinator. To pay for my studies I did part-time work and ran a small online business. I run the YouTube channel “Bahar Rayhan” and am building the website “Kemone Jabo dot com” with a friend."
+    description: "I am based at Bhasan Char. I earn my living from my salary. Earlier work: In May 2023 I received my appointment letter at the ICT Tower from the State Minister for ICT and joined the EDGE project at the Centre for Project Management and Information Systems (PMIS), University of Dhaka, as Training Coordinator. To pay for my studies I did part-time work and ran a small online business. I run the YouTube channel “Bahar Rayhan” and am building the website “Kemone Jabo dot com” with a friend."
   },
 
   experience: [
-    { title: "Project Officer", org: "BRAC", period: "June 2026 – present", text: "Working as a Project Officer at BRAC." },
-    { title: "HR & Operations Executive", org: "Kloud Project Limited, Chattogram", period: "2024 – May 2026", text: "Implemented and managed PIHR software and staff data. Formulated over 50 organisational policies and managed recruitment, selection and training. Made weekly branch visits to train staff and monitor daily operations, and kept liaison with government and private agencies." },
+    { title: "Project Officer", org: "BRAC, Humanitarian Crisis Management Programme", period: "June 2026 – present", text: "Working as a Project Officer at Bhasan Char." },
+    { title: "Executive Operation Head and HR Manager", org: "Kloud Project Limited, Chattogram", period: "2024 – May 2026", text: "Implemented and managed PIHR software and staff data. Formulated over 50 organisational policies and managed recruitment, selection and training. Made weekly branch visits to train staff and monitor daily operations, and kept liaison with government and private agencies." },
     { title: "Training Coordinator, EDGE project", org: "Centre for Project Management and Information Systems (PMIS), University of Dhaka", period: "2023 – 2024 (about eight months)", text: "Appointed in May 2023 under the ICT Division's Enhancing Digital Government and Economy (EDGE) project." },
     { title: "Training Facilitator", org: "British Council Bangladesh & The Hunger Project Bangladesh", period: "2017 – 2021", text: "Ran community-based youth leadership trainings for university students, promoted gender equality and social inclusion at village level, facilitated Training of Trainers (ToT) programmes, and prepared project documentation for donors and teams." }
   ],
@@ -178,7 +202,7 @@ window.SITE = {
     { year: "Afterwards", title: "Learning everything again", text: "I learned to write with a pen in my mouth, type on a computer, ride a motorcycle and skate." },
     { year: "2021", title: "Master's completed", text: "I completed my Master's in the Department of History, University of Chittagong, after earning my B.A. there in 2020." },
     { year: "2023", title: "Recognition and a job", text: "Prothom Alo and Desh Rupantor published my story. After years of trying to find work, I was appointed Training Coordinator for the EDGE project at PMIS, University of Dhaka. I am working towards my dream of living together with my mother." },
-    { year: "Today", title: "Moving forward", text: "Since June 2026 I have been working as a Project Officer at BRAC." }
+    { year: "Today", title: "Moving forward", text: "Since June 2026 I have been working as a Project Officer at BRAC, in its Humanitarian Crisis Management Programme at Bhasan Char." }
   ],
 
   skills: ["Community mobilisation", "Stakeholder engagement and advocacy", "Disability inclusion", "Data collection and reporting", "Training and facilitation", "HR and operations", "Microsoft Office, Photoshop, Illustrator", "Content creation (YouTube)", "Motorcycle riding", "Skating"],
