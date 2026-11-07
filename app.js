@@ -126,7 +126,7 @@
     const dlg = $("photoDlg");
     filterable($("galleryFilter"), pics, (p) => p.category, (list) => {
       $("galleryBody").innerHTML = list.map((p) => p.src
-        ? `<button class="tile" data-s="${esc(p.src)}" data-cap="${esc(p.caption)}" aria-label="${esc(p.caption)}"><img src="${esc(p.src)}" alt="${esc(p.caption)}" loading="lazy"></button>`
+        ? `<button class="tile" data-s="${esc(p.src)}" data-cap="${esc(p.caption)}" aria-label="${esc(p.caption)}"><img src="${esc(p.thumb || p.src)}" alt="${esc(p.caption)}" loading="lazy"></button>`
         : `<div class="tile ph"><b>${esc(p.category || "")}</b><span>${esc(p.caption)}</span>${tag(p)}</div>`).join("");
     });
     $("galleryBody").addEventListener("click", (e) => {

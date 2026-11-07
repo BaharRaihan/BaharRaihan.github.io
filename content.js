@@ -5,7 +5,7 @@
 //  HOW TO ADD NEW THINGS (put the newest at the TOP of each list):
 //   - media         : { outlet, type: "TV" | "Newspaper" | "Online", date, title, text, url, chapter }
 //   - videos        : { id: "YouTubeVideoID", title, text, category }
-//   - gallery       : { src: "images/name.jpg", caption, category }
+//   - gallery       : { src: "images/name.jpg", thumb: "images/name-thumb.jpg" (optional square preview), caption, category }
 //   - quotes        : { text, source, date }
 //   - achievements  : { title, text, year }
 //   - works         : { title, text, year, link }
@@ -94,7 +94,13 @@ window.SITE = {
 
   // Photos: leadership work, social work, workplace, travel, press clippings. Put files in the "images" folder.
   gallery: [
-    { src: "", caption: "Sample: leading a community programme.", category: "Leadership", sample: true },
+    { src: "images/leadership-1.jpg", thumb: "images/leadership-1-thumb.jpg", caption: "Youth leadership training, 2016–2022", category: "Leadership" },
+    { src: "images/leadership-2.jpg", thumb: "images/leadership-2-thumb.jpg", caption: "Youth leadership training, 2016–2022", category: "Leadership" },
+    { src: "images/leadership-3.jpg", thumb: "images/leadership-3-thumb.jpg", caption: "Youth leadership training, 2016–2022", category: "Leadership" },
+    { src: "images/leadership-4.jpg", thumb: "images/leadership-4-thumb.jpg", caption: "Youth leadership training, 2016–2022", category: "Leadership" },
+    { src: "images/leadership-5.jpg", thumb: "images/leadership-5-thumb.jpg", caption: "Youth leadership training, 2016–2022", category: "Leadership" },
+    { src: "images/leadership-6.jpg", thumb: "images/leadership-6-thumb.jpg", caption: "Youth leadership training, 2016–2022", category: "Leadership" },
+    { src: "images/leadership-7.jpg", thumb: "images/leadership-7-thumb.jpg", caption: "Youth leadership training, 2016–2022", category: "Leadership" },
     { src: "", caption: "Sample: social work in the field.", category: "Social work", sample: true },
     { src: "", caption: "Sample: at my workplace.", category: "Workplace", sample: true },
     { src: "", caption: "Sample: travelling to the hills.", category: "Travel", sample: true },
