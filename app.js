@@ -48,26 +48,45 @@
   $("heroSocial").innerHTML = socials.map((s) => `<a class="${ICON.kind(s.label)}" href="${esc(link(s.url))}" target="_blank" rel="noopener" aria-label="${esc(s.label)}" title="${esc(s.label)}">${ICON.glyph(ICON.kind(s.label))}</a>`).join("");
   $("cvIco").innerHTML = ICON.glyph("download");
 
-  // ---- media wall
-  const media = real(S.media);
+  // ---- media wall (newspaper articles and TV / online video reports), newest first
+  const media = real(S.media).slice().sort((a, b) => String(b.iso || "").localeCompare(String(a.iso || "")));
   if (media.length) {
     $("media").hidden = false;
-    const hasTV = media.some((m) => m.type === "TV");
-    $("media").querySelector("h2").textContent = hasTV ? "As seen on TV and in newspapers" : "As seen in the news";
-    filterable($("mediaFilter"), media, (m) => m.type, (list) => {
-      const pal = ["#c1121f", "#0b3c8c", "#006a4e", "#b45309", "#7c3aed", "#0e7490"];
-      const known = Object.keys(S.outlets || {});
-      const styleOf = (name) => {
-        const o = (S.outlets || {})[name] || {};
-        const idx = [...new Set(media.map((x) => x.outlet))].indexOf(name);
-        return { color: o.color || pal[(known.length + Math.max(idx, 0)) % pal.length], logo: o.logo || "" };
-      };
-      $("mediaBody").innerHTML = list.map((m) => {
-        const st = styleOf(m.outlet);
-        const mark = st.logo ? `<span class="mlogo"><img src="${esc(st.logo)}" alt="${esc(m.outlet)}"></span>` : `<span class="mmark">${esc(m.outlet)}</span>`;
-        const verb = m.type === "TV" ? "Watch" : "Read";
-        return `<article class="mcard" style="--oc:${esc(st.color)}"><div class="mhead">${mark}<span class="mdate">${esc(m.date || "")}</span></div><div class="mbody"><span class="badge ${esc((m.type || "").toLowerCase())}">${esc(m.type)}</span><h3>${esc(m.title)}</h3>${m.text ? `<p>${esc(m.text)}</p>` : ""}${m.url ? `<a class="mbtn" href="${esc(link(m.url))}" target="_blank" rel="noopener">${verb} the story <span aria-hidden="true">→</span></a>` : ""}${tag(m)}</div></article>`;
-      }).join("");
+    $("media").querySelector("h2").textContent = media.some((m) => m.type === "TV") ? "As seen on TV and in newspapers" : "As seen in the news";
+    const pal = ["#c1121f", "#0b3c8c", "#006a4e", "#b45309", "#7c3aed", "#0e7490"];
+    const known = Object.keys(S.outlets || {});
+    const names = [...new Set(media.map((x) => x.outlet))];
+    const styleOf = (name) => {
+      const o = (S.outlets || {})[name] || {};
+      return { color: o.color || pal[(known.length + Math.max(names.indexOf(name), 0)) % pal.length], logo: o.logo || "" };
+    };
+    const mins = (s) => Math.floor(+s / 60) + ":" + String(+s % 60).padStart(2, "0");
+    const card = (m) => {
+      const st = styleOf(m.outlet);
+      const mark = st.logo ? `<span class="mlogo"><img src="${esc(st.logo)}" alt="${esc(m.outlet)}"></span>` : `<span class="mmark">${esc(m.outlet)}</span>`;
+      const thumb = m.video ? `<button class="mthumb" data-v="${esc(m.video)}" aria-label="Play: ${esc(m.title)}" style="background-image:url('https://i.ytimg.com/vi/${esc(m.video)}/hqdefault.jpg')"><span>▶</span>${m.dur ? `<em>${mins(m.dur)}</em>` : ""}</button>` : "";
+      const go = m.url ? `<a class="mbtn" href="${esc(link(m.url))}" target="_blank" rel="noopener">${m.video ? "Open on YouTube" : "Read the story"} <span aria-hidden="true">${m.video ? "↗" : "→"}</span></a>` : "";
+      return `<article class="mcard" style="--oc:${esc(st.color)}"><div class="mhead">${mark}<span class="mdate">${esc(m.date || "")}</span></div><div class="mbody"><span class="badge ${esc((m.type || "").toLowerCase())}">${esc(m.type)}${m.video ? " · video" : ""}</span><h3>${esc(m.title)}</h3>${thumb}${m.text ? `<p>${esc(m.text)}</p>` : ""}${go}${tag(m)}</div></article>`;
+    };
+    const LIMIT = 6;
+    let showAll = false, current = media;
+    const draw = (list) => {
+      current = list;
+      const shown = showAll ? list : list.slice(0, LIMIT);
+      $("mediaBody").innerHTML = shown.map(card).join("") + (!showAll && list.length > LIMIT ? `<button type="button" id="moreNews" class="more">Show all ${list.length} reports</button>` : "");
+    };
+    filterable($("mediaFilter"), media, (m) => m.type, (list) => { showAll = false; draw(list); });
+    $("mediaBody").addEventListener("click", (e) => {
+      if (e.target.closest("#moreNews")) { showAll = true; draw(current); return; }
+      const b = e.target.closest("button[data-v]");
+      if (!b) return;
+      const f = document.createElement("iframe");
+      f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(b.dataset.v) + "?autoplay=1";
+      f.allow = "autoplay; encrypted-media; picture-in-picture";
+      f.allowFullscreen = true;
+      f.title = "Video";
+      f.className = "mframe";
+      b.replaceWith(f);
     });
   } else $("heroMedia").hidden = true;
 
@@ -75,7 +94,10 @@
   $("aboutBody").innerHTML = S.about.map((p) => `<p>${esc(p)}</p>`).join("");
   $("chapters").innerHTML = S.chapters.map((c, i) => {
     const rel = media.filter((m) => m.chapter === c.key);
-    return `<article class="chapter c${i + 1} reveal" id="ch-${esc(c.key)}"><div class="cin"><div class="bignum" aria-hidden="true">${i + 1}</div><div class="ctag">Chapter ${i + 1} · ${esc(c.tag)}</div><h3>${esc(c.title)}</h3>${c.pull ? `<p class="pull">“${esc(c.pull)}”</p>` : ""}<div class="ctext">${c.text.map((p) => `<p>${esc(p)}</p>`).join("")}</div>${c.image ? `<figure class="cfig"><img src="${esc(c.image)}" alt="${esc(c.caption || c.title)}" loading="lazy">${c.caption ? `<figcaption>${esc(c.caption)}</figcaption>` : ""}</figure>` : demo ? `<figure class="cfig ph">Photo slot for this chapter (landscape, 1600 x 900). content.js → chapters → image</figure>` : ""}${rel.length ? `<div class="rel">In the news: ${rel.map((m) => m.url ? `<a href="${esc(link(m.url))}" target="_blank" rel="noopener">${esc(m.outlet)}</a>` : esc(m.outlet)).join(" · ")}</div>` : ""}</div></article>`;
+    const seenOutlets = new Set();
+    const relUniq = rel.filter((m) => !seenOutlets.has(m.outlet) && seenOutlets.add(m.outlet));
+    const relShown = relUniq.slice(0, 5), relMore = relUniq.length - relShown.length;
+    return `<article class="chapter c${i + 1} reveal" id="ch-${esc(c.key)}"><div class="cin"><div class="bignum" aria-hidden="true">${i + 1}</div><div class="ctag">Chapter ${i + 1} · ${esc(c.tag)}</div><h3>${esc(c.title)}</h3>${c.pull ? `<p class="pull">“${esc(c.pull)}”</p>` : ""}<div class="ctext">${c.text.map((p) => `<p>${esc(p)}</p>`).join("")}</div>${c.image ? `<figure class="cfig"><img src="${esc(c.image)}" alt="${esc(c.caption || c.title)}" loading="lazy">${c.caption ? `<figcaption>${esc(c.caption)}</figcaption>` : ""}</figure>` : demo ? `<figure class="cfig ph">Photo slot for this chapter (landscape, 1600 x 900). content.js → chapters → image</figure>` : ""}${rel.length ? `<div class="rel">In the news: ${relShown.map((m) => m.url ? `<a href="${esc(link(m.url))}" target="_blank" rel="noopener">${esc(m.outlet)}</a>` : esc(m.outlet)).join(" · ")}${relMore > 0 ? ` · and ${relMore} more` : ""}</div>` : ""}</div></article>`;
   }).join("");
 
   // ---- ticker of outlets
@@ -228,7 +250,7 @@
       <h2>Training</h2><ul>${S.training.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
       <h2>Awards</h2><ul>${S.awards.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
       <h2>Advocacy and Community Work</h2>${S.advocacy.map((a) => `<p><b>${esc(a.title)}:</b> ${esc(a.text)}</p>`).join("")}
-      <h2>In the Media</h2><ul>${(S.media || []).filter((m) => !m.sample).map((m) => `<li>${esc(m.outlet)} (${esc(m.type)}), ${esc(m.date)}: ${esc(m.title)}</li>`).join("")}</ul>
+      <h2>In the Media</h2><ul>${(S.media || []).filter((m) => !m.sample).sort((a, b) => String(b.iso || "").localeCompare(String(a.iso || ""))).slice(0, 12).map((m) => `<li>${esc(m.outlet)} (${esc(m.type)}), ${esc(m.date)}: ${esc(m.title)}</li>`).join("")}</ul><p class="sub small">More coverage: baharraihan.github.io</p>
       <h2>Skills</h2><p>${S.skills.map(esc).join(" · ")}</p>
       <h2>Languages</h2><p>${S.languages.map(esc).join(" · ")}</p>
       <h2>Life Journey</h2>${S.journey.map((j) => `<p><b>${esc(j.year)} — ${esc(j.title)}:</b> ${esc(j.text)}</p>`).join("")}`;

@@ -160,3 +160,10 @@ body[data-page=cv] .btn,body[data-page=privacy] .btn{background:var(--yellow)}
 .mcard p{margin:0 0 14px;color:var(--mut);font-size:15.5px}
 .mbtn{display:inline-block;background:var(--oc,var(--green));color:#fff;text-decoration:none;font-weight:800;border-radius:999px;padding:8px 18px;font-size:15px}
 .mbtn:hover{filter:brightness(1.12)}
+/* video cards inside the news wall */
+.mthumb{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#0b1f17 center/cover;cursor:pointer;overflow:hidden;padding:0;margin:4px 0 12px}
+.mthumb span{position:absolute;inset:0;margin:auto;width:60px;height:60px;border-radius:50%;background:var(--oc,var(--redbright));color:#fff;display:grid;place-items:center;font-size:24px;padding-left:4px;box-shadow:0 0 0 4px rgba(255,255,255,.85)}
+.mthumb em{position:absolute;right:8px;bottom:8px;font-style:normal;font-size:12.5px;font-weight:700;background:rgba(0,0,0,.75);color:#fff;border-radius:6px;padding:1px 8px}
+.mframe{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000;margin:4px 0 12px;display:block}
+.more{display:block;width:100%;font:inherit;font-weight:800;font-size:16px;padding:14px;border:2px solid var(--ink);border-radius:14px;background:var(--ink);color:#fff;cursor:pointer;box-shadow:5px 5px 0 var(--redbright)}
+.more:hover{filter:brightness(1.15)}
