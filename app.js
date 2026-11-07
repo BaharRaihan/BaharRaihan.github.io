@@ -1,6 +1,9 @@
 (function () {
   const S = window.SITE;
-  const $ = (id) => document.getElementById(id);
+  // If a page and its script ever get out of step (an old copy in the browser cache), a missing element
+  // must not stop the whole page from drawing, so a missing id gets a harmless stand-in.
+  const ghosts = {};
+  const $ = (id) => document.getElementById(id) || (ghosts[id] = ghosts[id] || Object.assign(document.createElement("div"), { innerHTML: "<h2></h2>" }));
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const link = (u) => (/^https?:\/\//.test(u) ? u : "#");
 
