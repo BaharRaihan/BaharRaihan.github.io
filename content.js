@@ -59,9 +59,12 @@ window.SITE = {
 
   // As seen on TV and in newspapers. Add every news item here (newest first).
   media: [
-    { outlet: "Prothom Alo", type: "Newspaper", date: "4 May 2023", title: "Pen held in mouth, writing with his elbow: Bahar Uddin passes his Master's", text: "Coverage of completing a Master's degree in History at the University of Chittagong.", url: "https://www.prothomalo.com/bangladesh/d58c2ai4dp", chapter: "forward" },
+    { outlet: "Samakal", type: "Newspaper", date: "24 May 2025", title: "Bahar passed his Master’s by writing with his mouth", text: "A feature on his journey, studies and work after losing his hands in 2004.", url: "https://samakal.com/kisualonil/article/297100/%E0%A6%AE%E0%A7%81%E0%A6%96-%E0%A6%A6%E0%A6%BF%E0%A7%9F%E0%A7%87-%E0%A6%B2%E0%A6%BF%E0%A6%96%E0%A7%87-%E0%A6%B8%E0%A7%8D%E0%A6%A8%E0%A6%BE%E0%A6%A4%E0%A6%95%E0%A7%8B%E0%A6%A4%E0%A7%8D%E0%A6%A4%E0%A6%B0-%E0%A6%AA%E0%A6%BE%E0%A6%B8-%E0%A6%95%E0%A6%B0%E0%A7%87%E0%A6%9B%E0%A7%87%E0%A6%A8-%E0%A6%AC%E0%A6%BE%E0%A6%B9%E0%A6%BE%E0%A6%B0", chapter: "forward" },
     { outlet: "Desh Rupantor", type: "Newspaper", date: "17 May 2023", title: "Indomitable Rayhan", text: "Coverage of the appointment as Training Coordinator at the University of Dhaka.", url: "https://www.deshrupantor.com/426118/%E0%A6%85%E0%A6%A6%E0%A6%AE%E0%A7%8D%E0%A6%AF-%E0%A6%B0%E0%A6%BE%E0%A7%9F%E0%A6%B9%E0%A6%BE%E0%A6%A8", chapter: "forward" },
-    { outlet: "Prothom Alo", type: "Newspaper", date: "23 June 2021", title: "Feature on SIM registration for people without fingerprints", text: "A major feature on the problem I raised about biometric SIM registration.", url: "", chapter: "work" },
+    { outlet: "Dainik Bangla", type: "Newspaper", date: "15 May 2023", title: "Bahar, the indomitable young man who lost both hands, gets a job", text: "Report on the appointment letter handed to him at the ICT Tower.", url: "https://www.dainikbangla.com.bd/information-technology/21624/1684142480", chapter: "forward" },
+    { outlet: "Prothom Alo", type: "Newspaper", date: "4 May 2023", title: "Pen held in mouth, writing with his elbow: Bahar Uddin passes his Master’s", text: "Coverage of completing a Master’s degree in History at the University of Chittagong.", url: "https://www.prothomalo.com/bangladesh/d58c2ai4dp", chapter: "forward" },
+    { outlet: "Prothom Alo", type: "Newspaper", date: "23 June 2021", title: "Bahar gets a SIM card in his own name", text: "Follow-up: Grameenphone handed him a SIM card after the first report.", url: "https://www.prothomalo.com/bangladesh/%E0%A6%A8%E0%A6%BF%E0%A6%9C%E0%A7%87%E0%A6%B0-%E0%A6%A8%E0%A6%BE%E0%A6%AE%E0%A7%87-%E0%A6%B8%E0%A6%BF%E0%A6%AE-%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A1-%E0%A6%AA%E0%A7%87%E0%A6%B2%E0%A7%87%E0%A6%A8-%E0%A6%B8%E0%A7%87%E0%A6%87-%E0%A6%AC%E0%A6%BE%E0%A6%B9%E0%A6%BE%E0%A6%B0", chapter: "work" },
+    { outlet: "Prothom Alo", type: "Newspaper", date: "June 2021", title: "He has no hands, so he cannot buy a SIM card", text: "Report on how fingerprint-based SIM registration stopped him from buying a SIM in his own name.", url: "https://www.prothomalo.com/bangladesh/%E0%A6%A6%E0%A7%81%E0%A6%B9%E0%A6%BE%E0%A6%A4-%E0%A6%A8%E0%A7%87%E0%A6%87-%E0%A6%A4%E0%A6%BE%E0%A6%87-%E0%A6%95%E0%A6%BF%E0%A6%A8%E0%A6%A4%E0%A7%87-%E0%A6%AA%E0%A6%BE%E0%A6%B0%E0%A6%9B%E0%A7%87%E0%A6%A8-%E0%A6%A8%E0%A6%BE-%E0%A6%B8%E0%A6%BF%E0%A6%AE-%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A1", chapter: "obstacles" },
     { outlet: "Your TV channel", type: "TV", date: "2024", title: "A sample TV news item", text: "Add the channel name, date and link of each TV report here.", url: "", chapter: "journey", sample: true },
     { outlet: "Your online news site", type: "Online", date: "2025", title: "A sample online news item", text: "Add online news here.", url: "", chapter: "obstacles", sample: true }
   ],
@@ -80,7 +83,7 @@ window.SITE = {
   ],
 
   works: [
-    { title: "Mobile SIM registration for people without fingerprints", text: "I advocated for the rights of persons with disabilities to access mobile communication services. The problem received national attention in a major feature in The Daily Prothom Alo (23 June 2021) and prompted discussion with regulators such as the BTRC.", year: "2021" },
+    { title: "Mobile SIM registration for people without fingerprints", text: "I advocated for the rights of persons with disabilities to access mobile communication services. The problem received national attention in a major feature in The Daily Prothom Alo (June 2021) and prompted discussion with regulators such as the BTRC.", year: "2021" },
     { title: "“Smile for Children” project", text: "As coordinator I led a community initiative to improve access to education and well-being support for underprivileged children, ran awareness campaigns on children's rights and inclusive education, and trained volunteers on child protection and inclusion.", year: "" },
     { title: "Your next project or talk", text: "Describe a piece of work in one or two sentences.", year: "2026", link: "", sample: true }
   ],
@@ -151,7 +154,7 @@ window.SITE = {
     "Special Honor Award, Prochesta Foundation Bangladesh & B.M Char Blood Donors Group"
   ],
   advocacy: [
-    { title: "Mobile SIM registration for people without fingerprints", text: "I advocated for the rights of persons with disabilities to access mobile communication services in Bangladesh. The biometric registration problem for people without fingerprints received national attention in a major feature in The Daily Prothom Alo (23 June 2021) and prompted discussion with regulators such as the BTRC." },
+    { title: "Mobile SIM registration for people without fingerprints", text: "I advocated for the rights of persons with disabilities to access mobile communication services in Bangladesh. The biometric registration problem for people without fingerprints received national attention in a major feature in The Daily Prothom Alo (June 2021) and prompted discussion with regulators such as the BTRC." },
     { title: "“Smile for Children” project", text: "As coordinator I led a community initiative to improve access to education and well-being support for underprivileged children, ran awareness campaigns on children's rights and inclusive education, and trained volunteers on child protection and inclusion." }
   ],
 

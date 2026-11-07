@@ -52,6 +52,8 @@
   const media = real(S.media);
   if (media.length) {
     $("media").hidden = false;
+    const hasTV = media.some((m) => m.type === "TV");
+    $("media").querySelector("h2").textContent = hasTV ? "As seen on TV and in newspapers" : "As seen in the news";
     filterable($("mediaFilter"), media, (m) => m.type, (list) => {
       $("mediaBody").innerHTML = list.map((m) => `<article class="mcard"><div class="mtop"><span class="badge ${esc((m.type || "").toLowerCase())}">${esc(m.type)}</span><span class="mout">${esc(m.outlet)}${m.date ? " · " + esc(m.date) : ""}</span></div><h3>${esc(m.title)}</h3>${m.text ? `<p>${esc(m.text)}</p>` : ""}${m.url ? `<a href="${esc(link(m.url))}" target="_blank" rel="noopener">${m.type === "TV" ? "Watch" : "Read"} the story ↗</a>` : ""}${tag(m)}</article>`).join("");
     });
