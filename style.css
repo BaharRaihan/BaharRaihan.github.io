@@ -146,8 +146,8 @@ body[data-page=cv] .btn,body[data-page=privacy] .btn{background:var(--yellow)}
 .when{display:flex;align-items:center;gap:4px;flex-wrap:wrap}.pinico{display:inline-grid;vertical-align:middle;margin-left:6px;color:var(--red)}.pinico svg{width:15px;height:15px}
 .cvcard{background:var(--green);color:#fff}.cvcard span{color:#e0f1e8}
 /* news wall: coloured cards with a newspaper-style masthead */
-#media{max-width:none;padding:44px 0 50px;background:#fff1c9;border-top:4px solid var(--ink);border-bottom:4px solid var(--ink)}
-#media>*{max-width:780px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px}
+.newswall{max-width:none;padding:44px 0 50px;background:#fff1c9;border-top:4px solid var(--ink)}.newswall.tvwall{background:#dbeafe;border-bottom:4px solid var(--ink)}
+.newswall>*{max-width:780px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px}
 .mediawall{gap:18px}
 .mcard{padding:0;overflow:hidden;border:2px solid var(--ink);border-radius:16px;box-shadow:6px 6px 0 var(--oc,var(--ink));background:#fff}
 .mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:var(--oc,var(--ink));color:#fff}

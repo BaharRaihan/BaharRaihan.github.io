@@ -48,36 +48,37 @@
   $("heroSocial").innerHTML = socials.map((s) => `<a class="${ICON.kind(s.label)}" href="${esc(link(s.url))}" target="_blank" rel="noopener" aria-label="${esc(s.label)}" title="${esc(s.label)}">${ICON.glyph(ICON.kind(s.label))}</a>`).join("");
   $("cvIco").innerHTML = ICON.glyph("download");
 
-  // ---- media wall (newspaper articles and TV / online video reports), newest first
+  // ---- news walls: newspapers, and TV / video news, each in its own section (newest first)
   const media = real(S.media).slice().sort((a, b) => String(b.iso || "").localeCompare(String(a.iso || "")));
-  if (media.length) {
-    $("media").hidden = false;
-    $("media").querySelector("h2").textContent = media.some((m) => m.type === "TV") ? "As seen on TV and in newspapers" : "As seen in the news";
-    const pal = ["#c1121f", "#0b3c8c", "#006a4e", "#b45309", "#7c3aed", "#0e7490"];
-    const known = Object.keys(S.outlets || {});
-    const names = [...new Set(media.map((x) => x.outlet))];
-    const styleOf = (name) => {
-      const o = (S.outlets || {})[name] || {};
-      return { color: o.color || pal[(known.length + Math.max(names.indexOf(name), 0)) % pal.length], logo: o.logo || "" };
-    };
-    const mins = (s) => Math.floor(+s / 60) + ":" + String(+s % 60).padStart(2, "0");
-    const card = (m) => {
-      const st = styleOf(m.outlet);
-      const mark = st.logo ? `<span class="mlogo"><img src="${esc(st.logo)}" alt="${esc(m.outlet)}"></span>` : `<span class="mmark">${esc(m.outlet)}</span>`;
-      const thumb = m.video ? `<button class="mthumb" data-v="${esc(m.video)}" aria-label="Play: ${esc(m.title)}" style="background-image:url('https://i.ytimg.com/vi/${esc(m.video)}/hqdefault.jpg')"><span>▶</span>${m.dur ? `<em>${mins(m.dur)}</em>` : ""}</button>` : "";
-      const go = m.url ? `<a class="mbtn" href="${esc(link(m.url))}" target="_blank" rel="noopener">${m.video ? "Open on YouTube" : "Read the story"} <span aria-hidden="true">${m.video ? "↗" : "→"}</span></a>` : "";
-      return `<article class="mcard" style="--oc:${esc(st.color)}"><div class="mhead">${mark}<span class="mdate">${esc(m.date || "")}</span></div><div class="mbody"><span class="badge ${esc((m.type || "").toLowerCase())}">${esc(m.type)}${m.video ? " · video" : ""}</span><h3>${esc(m.title)}</h3>${thumb}${m.text ? `<p>${esc(m.text)}</p>` : ""}${go}${tag(m)}</div></article>`;
-    };
+  const pal = ["#c1121f", "#0b3c8c", "#006a4e", "#b45309", "#7c3aed", "#0e7490"];
+  const known = Object.keys(S.outlets || {});
+  const names = [...new Set(media.map((x) => x.outlet))];
+  const styleOf = (name) => {
+    const o = (S.outlets || {})[name] || {};
+    return { color: o.color || pal[(known.length + Math.max(names.indexOf(name), 0)) % pal.length], logo: o.logo || "" };
+  };
+  const mins = (s) => Math.floor(+s / 60) + ":" + String(+s % 60).padStart(2, "0");
+  const card = (m) => {
+    const st = styleOf(m.outlet);
+    const mark = st.logo ? `<span class="mlogo"><img src="${esc(st.logo)}" alt="${esc(m.outlet)}"></span>` : `<span class="mmark">${esc(m.outlet)}</span>`;
+    const thumb = m.video ? `<button class="mthumb" data-v="${esc(m.video)}" aria-label="Play: ${esc(m.title)}" style="background-image:url('https://i.ytimg.com/vi/${esc(m.video)}/hqdefault.jpg')"><span>▶</span>${m.dur ? `<em>${mins(m.dur)}</em>` : ""}</button>` : "";
+    const go = m.url ? `<a class="mbtn" href="${esc(link(m.url))}" target="_blank" rel="noopener">${m.video ? "Open on YouTube" : "Read the story"} <span aria-hidden="true">${m.video ? "↗" : "→"}</span></a>` : "";
+    return `<article class="mcard" style="--oc:${esc(st.color)}"><div class="mhead">${mark}<span class="mdate">${esc(m.date || "")}</span></div><div class="mbody"><span class="badge ${esc((m.type || "").toLowerCase())}">${esc(m.type)}${m.video ? " · video" : ""}</span><h3>${esc(m.title)}</h3>${thumb}${m.text ? `<p>${esc(m.text)}</p>` : ""}${go}${tag(m)}</div></article>`;
+  };
+  const wall = (secId, filterId, bodyId, items, keyFn, heading) => {
+    if (!items.length) return false;
+    $(secId).hidden = false;
+    $(secId).querySelector("h2").textContent = heading;
     const LIMIT = 6;
-    let showAll = false, current = media;
+    let showAll = false, current = items;
     const draw = (list) => {
       current = list;
       const shown = showAll ? list : list.slice(0, LIMIT);
-      $("mediaBody").innerHTML = shown.map(card).join("") + (!showAll && list.length > LIMIT ? `<button type="button" id="moreNews" class="more">Show all ${list.length} reports</button>` : "");
+      $(bodyId).innerHTML = shown.map(card).join("") + (!showAll && list.length > LIMIT ? `<button type="button" class="more" data-more="1">Show all ${list.length} reports</button>` : "");
     };
-    filterable($("mediaFilter"), media, (m) => m.type, (list) => { showAll = false; draw(list); });
-    $("mediaBody").addEventListener("click", (e) => {
-      if (e.target.closest("#moreNews")) { showAll = true; draw(current); return; }
+    filterable($(filterId), items, keyFn, (list) => { showAll = false; draw(list); });
+    $(bodyId).addEventListener("click", (e) => {
+      if (e.target.closest("[data-more]")) { showAll = true; draw(current); return; }
       const b = e.target.closest("button[data-v]");
       if (!b) return;
       const f = document.createElement("iframe");
@@ -88,7 +89,14 @@
       f.className = "mframe";
       b.replaceWith(f);
     });
-  } else $("heroMedia").hidden = true;
+    return true;
+  };
+  const papers = media.filter((m) => m.type === "Newspaper");
+  const screens = media.filter((m) => m.type !== "Newspaper");
+  const hasTV = screens.some((m) => m.type === "TV"), hasOnline = screens.some((m) => m.type !== "TV");
+  const okPapers = wall("papers", "papersFilter", "papersBody", papers, (m) => (m.video ? "Videos" : "Articles"), "In the newspapers");
+  const okTV = wall("tv", "tvFilter", "tvBody", screens, (m) => (m.type === "TV" ? "TV channels" : "Online video"), hasTV && hasOnline ? "On TV and in video news" : hasTV ? "On TV" : "In video news");
+  if (okPapers) $("heroMedia").setAttribute("href", "#papers"); else if (okTV) $("heroMedia").setAttribute("href", "#tv"); else $("heroMedia").hidden = true;
 
   // ---- story
   $("aboutBody").innerHTML = S.about.map((p) => `<p>${esc(p)}</p>`).join("");
@@ -210,12 +218,12 @@
     (socials.length ? `<div class="cgrid">${socials.map((s) => { const k = ICON.kind(s.label); return `<a class="clink ${k}" href="${esc(link(s.url))}" target="_blank" rel="noopener">${ICON.tile(k)}<span class="ct"><b>${esc(s.label.replace(/\s*\(.*\)/, ""))}</b><small>${esc(ICON.hint[k] || "Open")}</small></span></a>`; }).join("")}</div>` : "");
 
   // ---- nav shows only sections that are visible
-  const nav = [["media", "In the news"], ["story", "Story"], ["achSec", "Achievements"], ["videosSec", "Videos"], ["gallerySec", "Moments"], ["quotesSec", "Quotes"], ["work", "Work"], ["contact", "Connect"]];
+  const nav = [["papers", "Newspapers"], ["tv", "TV"], ["story", "Story"], ["achSec", "Achievements"], ["videosSec", "Videos"], ["gallerySec", "Moments"], ["quotesSec", "Quotes"], ["work", "Work"], ["contact", "Connect"]];
   $("navLinks").innerHTML = nav.filter(([id]) => !$(id).hidden).map(([id, t]) => `<a href="#${id}">${t}</a>`).join("") + `<a href="cv.html" class="cvlink">CV</a>`;
 
   // ---- demo only: show which content.js field feeds each section
   if (demo) {
-    const where = { media: "media", story: "about + chapters (title, pull, text, image)", achSec: "achievements", videosSec: "videos", gallerySec: "gallery", quotesSec: "quotes", work: "work + works + experience", learn: "education + training + skills", updatesSec: "updates", contact: "email + social" };
+    const where = { papers: "media (Newspaper)", tv: "media (TV / Online)", story: "about + chapters (title, pull, text, image)", achSec: "achievements", videosSec: "videos", gallerySec: "gallery", quotesSec: "quotes", work: "work + works + experience", learn: "education + training + skills", updatesSec: "updates", contact: "email + social" };
     Object.entries(where).forEach(([id, f]) => {
       const h = document.querySelector("#" + id + " h2");
       if (h) h.insertAdjacentHTML("beforeend", `<span class="slot">content.js → ${f}</span>`);
