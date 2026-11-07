@@ -69,6 +69,16 @@ window.SITE = {
     { outlet: "Your online news site", type: "Online", date: "2025", title: "A sample online news item", text: "Add online news here.", url: "", chapter: "obstacles", sample: true }
   ],
 
+  // Colour (and optional real logo) for each news outlet. The wordmark is drawn in text until you add a logo.
+  // To add a real logo: put the file in images/logos/ (a PNG or SVG with a transparent background) and write
+  // its path, e.g. logo: "images/logos/prothomalo.png". Outlets not listed here get an automatic colour.
+  outlets: {
+    "Prothom Alo": { color: "#c1121f", logo: "" },
+    "Samakal": { color: "#0b3c8c", logo: "" },
+    "Desh Rupantor": { color: "#006a4e", logo: "" },
+    "Dainik Bangla": { color: "#b45309", logo: "" }
+  },
+
   quotes: [
     { text: "Your own words go here: one short line that could lift someone up on a hard day.", source: "Bahar Uddin Raihan", date: "", sample: true },
     { text: "A second sample quote. Replace it, or delete it, when you add your real ones.", source: "Bahar Uddin Raihan", date: "", sample: true }

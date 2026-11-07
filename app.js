@@ -55,7 +55,19 @@
     const hasTV = media.some((m) => m.type === "TV");
     $("media").querySelector("h2").textContent = hasTV ? "As seen on TV and in newspapers" : "As seen in the news";
     filterable($("mediaFilter"), media, (m) => m.type, (list) => {
-      $("mediaBody").innerHTML = list.map((m) => `<article class="mcard"><div class="mtop"><span class="badge ${esc((m.type || "").toLowerCase())}">${esc(m.type)}</span><span class="mout">${esc(m.outlet)}${m.date ? " · " + esc(m.date) : ""}</span></div><h3>${esc(m.title)}</h3>${m.text ? `<p>${esc(m.text)}</p>` : ""}${m.url ? `<a href="${esc(link(m.url))}" target="_blank" rel="noopener">${m.type === "TV" ? "Watch" : "Read"} the story ↗</a>` : ""}${tag(m)}</article>`).join("");
+      const pal = ["#c1121f", "#0b3c8c", "#006a4e", "#b45309", "#7c3aed", "#0e7490"];
+      const known = Object.keys(S.outlets || {});
+      const styleOf = (name) => {
+        const o = (S.outlets || {})[name] || {};
+        const idx = [...new Set(media.map((x) => x.outlet))].indexOf(name);
+        return { color: o.color || pal[(known.length + Math.max(idx, 0)) % pal.length], logo: o.logo || "" };
+      };
+      $("mediaBody").innerHTML = list.map((m) => {
+        const st = styleOf(m.outlet);
+        const mark = st.logo ? `<span class="mlogo"><img src="${esc(st.logo)}" alt="${esc(m.outlet)}"></span>` : `<span class="mmark">${esc(m.outlet)}</span>`;
+        const verb = m.type === "TV" ? "Watch" : "Read";
+        return `<article class="mcard" style="--oc:${esc(st.color)}"><div class="mhead">${mark}<span class="mdate">${esc(m.date || "")}</span></div><div class="mbody"><span class="badge ${esc((m.type || "").toLowerCase())}">${esc(m.type)}</span><h3>${esc(m.title)}</h3>${m.text ? `<p>${esc(m.text)}</p>` : ""}${m.url ? `<a class="mbtn" href="${esc(link(m.url))}" target="_blank" rel="noopener">${verb} the story <span aria-hidden="true">→</span></a>` : ""}${tag(m)}</div></article>`;
+      }).join("");
     });
   } else $("heroMedia").hidden = true;
 
