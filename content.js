@@ -3,6 +3,7 @@
 //  Edit here -> website, CV and app all update.
 //
 //  HOW TO ADD NEW THINGS (put the newest at the TOP of each list):
+//   - heroImages    : list of top-of-page pictures (see below, next to photo)
 //   - media         : { outlet, type: "TV" | "Newspaper" | "Online", date, title, text, url, chapter }
 //   - videos        : { id: "YouTubeVideoID", title, text, category }
 //   - gallery       : { src: "images/name.jpg", thumb: "images/name-thumb.jpg" (optional square preview), caption, category }
@@ -26,6 +27,19 @@ window.SITE = {
   headline: "Your circumstances do not decide your story. You do.",
   intro: "Real life, honest words and small steps forward, shared so that someone who feels stuck today can find the courage to begin again.",
   photo: "photo.jpg",
+  // Big pictures behind the name at the top of the home page. They fade one after another.
+  // Add as many as you like (newest first): put the file in images/hero/ and add a line, e.g.  "images/hero/2.jpg"
+  // Or { src: "images/hero/2.jpg", pos: "center 20%" } to choose which part of the photo stays in view.
+  // Best: a portrait or square photo, at least 1500 px tall, with the person on the right side.
+  heroImages: [
+    "images/hero/1.jpg",
+    { src: "images/hero/3.jpg", pos: "50% 30%" },
+    { src: "images/hero/2.jpg", pos: "35% 60%" },
+    { src: "images/hero/4.jpg", pos: "50% 65%" },
+    { src: "images/hero/6.jpg", pos: "72% 30%" },
+    { src: "images/hero/7.jpg", pos: "38% 40%" },
+    { src: "images/hero/5.jpg", pos: "50% 50%" }
+  ],
   location: "Bangladesh",
   email: "bahar.raihan90@gmail.com",
   phone: "",                       // left empty on purpose: phone is not shown publicly

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bahar Uddin Raihan | My Story</title>
 <meta name="description" content="The story, strength and journey of Bahar Uddin Raihan: seen on TV and in newspapers, achievements, work, photos and videos.">
-<meta name="theme-color" content="#00523c">
+<meta name="theme-color" content="#08090a">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Bahar Uddin Raihan | My Story">
 <meta property="og:description" content="Your circumstances do not decide your story. You do. Seen on TV and in newspapers across Bangladesh.">
@@ -16,111 +16,31 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=82973ebb">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="home.css?v=6c86bbe3">
 </head>
 <body data-page="home">
 <div id="demoBar" class="demobar" hidden>Demo mode: sample items are shown. They never appear on the live site.</div>
-
-<header class="nav">
-  <a class="brand" href="#top" id="brandName"></a>
-  <nav id="navLinks"></nav>
+<div class="pbar" id="pbar"></div>
+<header class="nav" id="nav">
+  <a class="logo" href="#top">MY<b>STORY</b></a>
+  <nav class="menu" id="menu"></nav>
+  <a class="cvbtn" href="cv.html">Professional CV</a>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">☰</button>
 </header>
-
-<main id="top">
-  <section class="hero">
-    <div class="avatar" id="avatar"></div>
-    <p class="eyebrow" id="heroEyebrow"></p>
-    <h1 id="heroName"></h1>
-    <p class="roles" id="heroRoles"></p>
-    <p class="headline" id="heroHeadline"></p>
-    <p class="intro" id="heroIntro"></p>
-    <div class="actions">
-      <a class="btn" href="#papers" id="heroMedia">See me in the news</a>
-      <a class="btn ghost" href="cv.html"><span class="btnico" id="cvIco"></span>Professional CV</a>
-    </div>
-    <div id="heroSocial" class="social"></div>
-  </section>
-
-  <div id="ticker" class="ticker" hidden><div id="tickerTrack" class="track"></div></div>
-
-  <section id="qotd" class="wrap" hidden>
-    <figure class="qotd"><figcaption>Today's words of strength</figcaption><blockquote id="qotdText"></blockquote><cite id="qotdSrc"></cite></figure>
-  </section>
-
-  <section id="papers" class="wrap newswall" hidden>
-    <h2>In the newspapers</h2>
-    <div id="papersFilter" class="filter"></div>
-    <div id="papersBody" class="mediawall"></div>
-  </section>
-
-  <section id="tv" class="wrap newswall tvwall" hidden>
-    <h2>On TV and in video news</h2>
-    <div id="tvFilter" class="filter"></div>
-    <div id="tvBody" class="mediawall"></div>
-  </section>
-
-  <section id="story">
-    <div class="wrap"><h2>My story in four chapters</h2><div id="aboutBody" class="lead"></div></div>
-    <div id="chapters"></div>
-  </section>
-
-  <section id="achSec" class="wrap" hidden><h2>Achievements</h2><div id="achBody" class="grid"></div></section>
-
-  <section id="videosSec" class="wrap" hidden><h2>Videos</h2><div id="videoFilter" class="filter"></div><div id="videosBody" class="videos"></div></section>
-
-  <section id="gallerySec" class="wrap" hidden><h2>Moments</h2><div id="galleryFilter" class="filter"></div><div id="galleryBody" class="gallery"></div></section>
-
-  <section id="quotesSec" class="wrap" hidden><h2>Words of strength</h2><div id="quotesBody" class="quotes"></div></section>
-
-  <section id="othersSec" class="wrap" hidden><h2>What colleagues say</h2><div id="othersBody" class="quotes others"></div></section>
-
-  <section id="work" class="wrap">
-    <h2>Work and service</h2>
-    <div id="workBody" class="card"></div>
-    <div id="worksBody" class="cards"></div>
-    <h3>Experience</h3><div id="expBody" class="cards"></div>
-  </section>
-
-  <section id="learn" class="wrap">
-    <h2>Education and training</h2>
-    <div id="edu" class="cards"></div>
-    <ul id="trainBody" class="plain"></ul>
-    <div id="skills" class="chips"></div>
-  </section>
-
-  <section id="updatesSec" class="wrap" hidden><h2>Latest</h2><div id="feed" class="cards"></div></section>
-
-  <section id="contact" class="wrap">
-    <h2>Connect</h2>
-    <div id="contactBody"></div>
-    <a class="cvcard" href="cv.html"><b>Professional CV</b><span>Open, print or save as PDF. Share this link with any company: baharraihan.github.io/cv.html</span></a>
-  </section>
-</main>
-
+<main id="top"></main>
 <footer>
-  <p id="disclaimer" class="disclaimer"></p>
-  <div class="foot">
-    <span><span id="copy"></span> · <a href="privacy.html" style="color:inherit">Privacy</a></span>
-    <button id="supportLink" class="quiet" hidden>♡ Support</button>
-  </div>
+  <span id="copy"></span>
+  <span><a href="privacy.html">Privacy</a> <button id="supportLink" class="quiet" hidden>· ♡ Support</button></span>
 </footer>
-
 <dialog id="supportDlg">
   <form method="dialog"><button class="x" aria-label="Close">✕</button></form>
   <h3>♡ Support</h3>
-  <p id="supportMsg"></p>
+  <p id="supportMsg" style="margin-top:8px;color:#c4c8c5"></p>
   <ul id="supportList"></ul>
 </dialog>
-
-<dialog id="photoDlg" class="photodlg">
-  <form method="dialog"><button class="x" aria-label="Close">✕</button></form>
-  <img id="photoImg" alt="">
-  <p id="photoCap"></p>
-</dialog>
-
-<script src="content.js?v=1240877e"></script>
+<script src="content.js?v=44d760ab"></script>
 <script src="icons.js?v=9d6781a3"></script>
-<script src="app.js?v=b13319d1"></script>
+<script src="home.js?v=289a116e"></script>
 </body>
 </html>
