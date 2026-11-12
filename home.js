@@ -182,7 +182,14 @@ ${pics.length ? row("gg", "moments", "Moments", "Photos from the journey", pics.
     const r = tl.getBoundingClientRect();
     fill.style.height = Math.max(0, Math.min(r.height, innerHeight * 0.6 - r.top)) + "px";
   };
-  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  // highlight the menu link of the section you are in
+  const links = [...document.querySelectorAll("#menu a")];
+  const spy = () => {
+    let cur = "";
+    links.forEach((a) => { const s = document.querySelector(a.getAttribute("href")); if (s && s.getBoundingClientRect().top <= innerHeight * 0.35) cur = a.getAttribute("href"); });
+    links.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === cur));
+  };
+  addEventListener("scroll", () => { onScroll(); spy(); }, { passive: true }); onScroll(); spy();
 
   // ---- footer + support (quiet)
   $("copy").textContent = "© " + new Date().getFullYear() + " " + S.name;
