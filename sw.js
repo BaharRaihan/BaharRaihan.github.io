@@ -1,5 +1,5 @@
 const CACHE = "mystory-v14";
-const FILES = ["index.html", "cv.html", "style.css", "app.js", "home.css", "home.js", "images/hero/1.jpg", "content.js", "icon.svg", "icon-192.png", "icon-512.png", "privacy.html", "photo.jpg", "icons.js", "og-image.png", "manifest.webmanifest"];
+const FILES = ["index.html", "cv.html", "style.css", "app.js", "home.css", "home.js", "images/1.jpg", "content.js", "icon.svg", "icon-192.png", "icon-512.png", "privacy.html", "photo.jpg", "icons.js", "og-image.png", "manifest.webmanifest"];
 
 self.addEventListener("install", (e) => e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting())));
 self.addEventListener("activate", (e) => e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim())));

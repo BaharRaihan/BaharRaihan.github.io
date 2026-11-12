@@ -28,17 +28,17 @@ window.SITE = {
   intro: "Real life, honest words and small steps forward, shared so that someone who feels stuck today can find the courage to begin again.",
   photo: "photo.jpg",
   // Big pictures behind the name at the top of the home page. They fade one after another.
-  // Add as many as you like (newest first): put the file in images/hero/ and add a line, e.g.  "images/hero/2.jpg"
-  // Or { src: "images/hero/2.jpg", pos: "center 20%" } to choose which part of the photo stays in view.
+  // Add as many as you like (newest first): put the file in images/ and add a line, e.g.  "images/2.jpg"
+  // Or { src: "images/2.jpg", pos: "center 20%" } to choose which part of the photo stays in view.
   // Best: a portrait or square photo, at least 1500 px tall, with the person on the right side.
   heroImages: [
-    "images/hero/1.jpg",
-    { src: "images/hero/3.jpg", pos: "50% 30%" },
-    { src: "images/hero/2.jpg", pos: "35% 60%" },
-    { src: "images/hero/4.jpg", pos: "50% 65%" },
-    { src: "images/hero/6.jpg", pos: "72% 30%" },
-    { src: "images/hero/7.jpg", pos: "38% 40%" },
-    { src: "images/hero/5.jpg", pos: "50% 50%" }
+    "images/1.jpg",
+    { src: "images/3.jpg", pos: "50% 30%" },
+    { src: "images/2.jpg", pos: "35% 60%" },
+    { src: "images/4.jpg", pos: "50% 65%" },
+    { src: "images/6.jpg", pos: "72% 30%" },
+    { src: "images/7.jpg", pos: "38% 40%" },
+    { src: "images/5.jpg", pos: "50% 50%" }
   ],
   location: "Bangladesh",
   email: "bahar.raihan90@gmail.com",
